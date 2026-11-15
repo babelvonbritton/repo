@@ -1,0 +1,583 @@
+{
+  "action": {
+    "back": "ゴミ箱に戻る",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "create": "作成",
+    "deleteForever": "完全に削除",
+    "discard": "変更を破棄",
+    "done": "完了",
+    "emptyTrash": "ゴミ箱を空にする",
+    "keepEditing": "編集を続ける",
+    "restore": "元に戻す",
+    "save": "変更を保存",
+    "trash": "ゴミ箱に移動"
+  },
+  "app": {
+    "tagline": "仕事、プライベートの予定、学習など、どんな活動にも使える自由なワークスペース。"
+  },
+  "backup": {
+    "another": "別のバックアップを作成",
+    "doneBody": "{name}（{size}）。チェックサム {hash}。",
+    "doneTitle": "バックアップを保存しました",
+    "downloadAgain": "もう一度ダウンロード",
+    "encrypt": "パスフレーズでバックアップを暗号化",
+    "encryptionHint": "8文字以上を使用してください。復元時に必要です。パスフレーズを忘れた場合、復元できません。",
+    "confirmPassphrase": "パスフレーズを確認",
+    "intro": "すべてのボード、項目、メモ、ゴミ箱の中身をZIPファイルにまとめます。ファイルはこの端末にだけ保存されるので、安全な場所に保管してください。",
+    "keepOpen": "処理が終わるまで、このウィンドウを閉じないでください。",
+    "passphrase": "パスフレーズ",
+    "passphraseMismatch": "パスフレーズが一致しません。",
+    "start": "バックアップを作成",
+    "tabBackup": "バックアップ",
+    "tabRestore": "復元",
+    "title": "バックアップと復元"
+  },
+  "board": {
+    "completed": "{total, plural, other {#件中{done}件が完了}}",
+    "create": "作成",
+    "createTitle": "新しいボードを作成",
+    "glance": "ボードの概要",
+    "hintDrag": "ドラッグで並べ替えできます。項目を選ぶと編集できます。",
+    "hintLocked": "並べ替えるには、検索・絞り込み・並び順をリセットしてください。",
+    "nameLabel": "ボード名",
+    "namePlaceholder": "例：自宅リフォーム",
+    "newItem": "項目を追加",
+    "noMatches": "検索に一致する項目はありません。",
+    "progress": "ボードの進捗"
+  },
+  "confirm": {
+    "discardBody": "この項目の編集内容はまだ保存されていません。",
+    "discardTitle": "変更を破棄しますか？",
+    "emptyBody": "{count, plural, other {ゴミ箱の#件をすべて完全に削除します。この操作は元に戻せません。}}",
+    "emptyTitle": "ゴミ箱を空にしますか？",
+    "foreverBody": "この操作は元に戻せません。",
+    "foreverTitle": "この項目を完全に削除しますか？"
+  },
+  "date": {
+    "clear": "クリア",
+    "next": "次の月",
+    "pick": "日付を選択",
+    "prev": "前の月",
+    "today": "今日"
+  },
+  "detail": {
+    "applied": "{total}件を1回のトランザクションで書き込み",
+    "archiveVerified": "アーカイブを再読み込み：チェックサムが一致し、{total}件のデータも一致",
+    "checksum": "SHA-256 {hash}... が一致、{stores}種類のデータを確認",
+    "collected": "ボード{boards, plural, other {#件}}、ステータス{columns, plural, other {#件}}、項目{items, plural, other {#件}}、メモ{notes, plural, other {#件}}、ゴミ箱{trash, plural, other {#件}}",
+    "compared": "新規{added}件、同一{same}件、相違{differs}件",
+    "compressed": "{original}から{size}に圧縮",
+    "decrypted": "バックアップデータを復号しました",
+    "decryptionSkipped": "このバックアップは暗号化されていません",
+    "encrypted": "バックアップデータをパスフレーズで暗号化しました",
+    "encryptionSkipped": "パスフレーズ暗号化なし",
+    "metadata": "形式 {format}、{date} に Repo {version} で作成",
+    "packaged": "data.json {size}、SHA-256 {hash}...",
+    "read": "{name}、{size}",
+    "refreshed": "ワークスペースを再読み込みしました",
+    "restoreVerified": "整合性チェックに合格",
+    "safetySkipped": "選択によりスキップ",
+    "saved": "{name}",
+    "snapshot": "現在の{total}件をメモリに一時保管",
+    "unpacked": "manifest.json と data.json のみを確認",
+    "valid": "{total}件すべてが検証に合格",
+    "validNotices": "{total}件が合格、お知らせ{count}件"
+  },
+  "diff": {
+    "board": "ボード",
+    "chars": "{count}文字",
+    "dueDate": "期限",
+    "expires": "完全削除の日",
+    "inTrash": "ゴミ箱の中",
+    "label": "ラベル",
+    "location": "場所",
+    "name": "名前",
+    "none": "なし",
+    "note": "メモ",
+    "onBoard": "ボード上",
+    "priority": "優先度",
+    "stage": "ステータス",
+    "summary": "概要",
+    "title": "タイトル",
+    "tone": "色",
+    "value": "値"
+  },
+  "err": {
+    "BACKUP_APPLY_FAILED": {
+      "hint": "何も変更されていません。これまでのデータはそのままです。",
+      "title": "復元に失敗しました"
+    },
+    "BACKUP_ARCHIVE_INVALID": {
+      "hint": "復元できないファイルのため、保存されませんでした。もう一度お試しください。",
+      "title": "新しいバックアップの検証に失敗しました"
+    },
+    "BACKUP_CHECKSUM_MISMATCH": {
+      "hint": "チェックサムが一致しません。作成後に変更されたか、転送中に壊れた可能性があります。",
+      "title": "バックアップが破損しています"
+    },
+    "BACKUP_COLLECT_FAILED": {
+      "hint": "ページを再読み込みして、もう一度お試しください。",
+      "title": "データを読み取れませんでした"
+    },
+    "BACKUP_CRYPTO_UNAVAILABLE": {
+      "hint": "RepoをHTTPSまたはlocalhostで開いてください。それ以外ではブラウザが安全なハッシュ計算を無効にします。",
+      "title": "チェックサムを計算できません"
+    },
+    "BACKUP_DECRYPT_FAILED": {
+      "hint": "パスフレーズを確認し、バックアップファイルが変更または破損していないか確認してください。",
+      "title": "バックアップを復号できません"
+    },
+    "BACKUP_DOWNLOAD_FAILED": {
+      "hint": "ブラウザがダウンロードをブロックしました。「もう一度ダウンロード」を試すか、このサイトのダウンロードを許可してください。",
+      "title": "ファイルを保存できませんでした"
+    },
+    "BACKUP_FILE_READ_FAILED": {
+      "hint": "ファイルを選び直すか、先にこの端末へコピーしてください。",
+      "title": "ファイルを読み取れませんでした"
+    },
+    "BACKUP_FILE_TOO_LARGE": {
+      "hint": "端末を守るため、25 MBを超えるバックアップは受け付けません。",
+      "title": "ファイルが大きすぎます"
+    },
+    "BACKUP_MANIFEST_INVALID": {
+      "hint": "マニフェストが見つからないか、読み取れないか、別のアプリのものです。",
+      "title": "Repoのバックアップとして読み取れません"
+    },
+    "BACKUP_MERGE_INVALID": {
+      "hint": "統合するとデータに矛盾が生じるため、何も変更していません。技術的な詳細をご確認ください。",
+      "title": "選んだ組み合わせは適用できません"
+    },
+    "BACKUP_NOT_ZIP": {
+      "hint": "Repoで作成した.zipファイルを選んでください。ファイルが壊れているか、不完全な可能性があります。",
+      "title": "有効なZIPファイルではありません"
+    },
+    "BACKUP_PACKAGE_FAILED": {
+      "hint": "もう一度お試しください。繰り返し失敗する場合はページを再読み込みしてください。",
+      "title": "バックアップファイルを作成できませんでした"
+    },
+    "BACKUP_PASSWORD_REQUIRED": {
+      "hint": "このバックアップの作成時に使用したパスフレーズを入力してください。",
+      "title": "パスフレーズが必要です"
+    },
+    "BACKUP_PASSWORD_TOO_SHORT": {
+      "hint": "8文字以上のパスフレーズを設定してください。",
+      "title": "パスフレーズが短すぎます"
+    },
+    "BACKUP_ROLLBACK_FAILED": {
+      "hint": "この手順の前にダウンロードした安全用バックアップを復元してください。",
+      "title": "復元の完了も取り消しもできませんでした"
+    },
+    "BACKUP_SELFCHECK_FAILED": {
+      "hint": "保存データに不整合があるため、バックアップは作成されませんでした。技術的な詳細をご確認ください。",
+      "title": "バックアップ前のチェックに失敗しました"
+    },
+    "BACKUP_SIZE_MISMATCH": {
+      "hint": "データファイルのサイズがマニフェストと一致しません。バックアップをもう一度ダウンロードしてください。",
+      "title": "バックアップが不完全です"
+    },
+    "BACKUP_STALE": {
+      "hint": "何も復元していません。比較を最新にするため、もう一度復元を始めてください。",
+      "title": "確認中にデータが変更されました"
+    },
+    "BACKUP_STRUCTURE_INVALID": {
+      "hint": "Repoのルールに合わないデータがあるため、何も復元していません。技術的な詳細をご確認ください。",
+      "title": "バックアップのデータが正しくありません"
+    },
+    "BACKUP_UNEXPECTED_CONTENT": {
+      "hint": "Repoのバックアップには manifest.json と data.json だけが含まれます。このファイルは改変されたか、Repoのバックアップではありません。",
+      "title": "アーカイブの中身が想定と異なります"
+    },
+    "BACKUP_UNSUPPORTED_VERSION": {
+      "hint": "Repoを更新してから、もう一度お試しください。",
+      "title": "より新しいバージョンで作られたバックアップです"
+    },
+    "BACKUP_VERIFY_FAILED": {
+      "hint": "復元後のデータが検証に通らなかったため、元のデータに戻しました。",
+      "title": "復元を取り消しました"
+    },
+    "DATA_INTEGRITY": {
+      "hint": "まずバックアップを作成し、診断情報をコピーして詳細を確認してください。",
+      "title": "保存データに不整合がある可能性があります"
+    },
+    "LAST_BOARD": {
+      "hint": "先に別のボードを作成してから、これを削除してください。",
+      "title": "ボードは最低1つ必要です"
+    },
+    "LAST_STAGE": {
+      "hint": "先に別のステータスを追加してから、これを削除してください。",
+      "title": "ボードには最低1つのステータスが必要です"
+    },
+    "LIMIT_REACHED": {
+      "hint": "不要なものを削除してから、もう一度お試しください。",
+      "title": "上限に達しました"
+    },
+    "PREFS_UNAVAILABLE": {
+      "hint": "ブラウザが小さな設定データの保存をブロックしています。Repoは使えますが、最後に開いたボードを覚えられません。",
+      "title": "設定を保存できません"
+    },
+    "RENDER_CRASH": {
+      "hint": "データは安全です。ページを再読み込みして続けてください。",
+      "title": "この画面でエラーが発生しました"
+    },
+    "STORAGE_CLOSED": {
+      "hint": "別のタブでRepoが更新された可能性があります。このページを再読み込みしてください。",
+      "title": "ストレージが閉じられました"
+    },
+    "STORAGE_FAILED": {
+      "hint": "データは失われていません。もう一度お試しください。",
+      "title": "ローカルストレージへの保存に失敗しました"
+    },
+    "STORAGE_QUOTA": {
+      "hint": "空き容量を増やすかゴミ箱を空にしてから、もう一度お試しください。",
+      "title": "端末の空き容量が足りません"
+    },
+    "STORAGE_UNAVAILABLE": {
+      "hint": "Repoはデータをこのブラウザに保存します。サイトデータを許可し、プライベートブラウズを終了してから再読み込みしてください。",
+      "title": "ローカルストレージを使用できません"
+    },
+    "UNEXPECTED": {
+      "hint": "データはこの端末に安全に保存されています。もう一度お試しください。繰り返す場合はページを再読み込みしてください。",
+      "title": "予期しない問題が発生しました"
+    },
+    "VALIDATION": {
+      "hint": "使用できない値が含まれています。",
+      "title": "入力内容を確認してください"
+    }
+  },
+  "error": {
+    "copied": "コピーしました",
+    "copy": "診断情報をコピー",
+    "copyFailed": "コピーできませんでした",
+    "generic": "問題が発生しました。もう一度お試しください。",
+    "noteLoad": "メモを読み込めなかったため、上書きを防ぐ目的で編集をロックしています。",
+    "reload": "ページを再読み込み",
+    "required": "タイトルを入力してください。",
+    "retry": "もう一度試す",
+    "technical": "技術的な詳細"
+  },
+  "field": {
+    "boardName": "ボード名",
+    "column": "ステータス",
+    "columnName": "ステータス名",
+    "columnTone": "色",
+    "dueDate": "期限",
+    "label": "ラベル",
+    "note": "メモ",
+    "priority": "優先度",
+    "summary": "概要",
+    "title": "タイトル"
+  },
+  "filter": {
+    "all": "すべての優先度",
+    "priority": "優先度"
+  },
+  "item": {
+    "add": "項目を追加",
+    "addTo": "「{stage}」に項目を追加",
+    "details": "項目の詳細",
+    "dueDate": "期限",
+    "emptyColumn": "まだ項目がありません",
+    "label": "ラベル",
+    "labelPlaceholder": "一般",
+    "new": "新しい項目",
+    "noDue": "期限なし",
+    "note": "メモ",
+    "noteCount": "{count} / {max}",
+    "noteLoading": "メモを読み込み中...",
+    "notePlaceholder": "詳細やリンク、忘れたくないことを自由に書けます...",
+    "priority": "優先度",
+    "stage": "ステータス",
+    "summary": "概要",
+    "summaryPlaceholder": "ひとことで説明",
+    "title": "タイトル",
+    "titlePlaceholder": "やることを入力"
+  },
+  "kind": {
+    "board": "ボード",
+    "column": "ステータス",
+    "item": "項目",
+    "note": "メモ",
+    "setting": "設定",
+    "trash": "ゴミ箱"
+  },
+  "legal": {
+    "backToApp": "Repoに戻る",
+    "license": "MITライセンス",
+    "privacy": "プライバシーとポリシー",
+    "version": "バージョン {version}"
+  },
+  "merge": {
+    "andMore": "ほか{count}件",
+    "backup": "バックアップ",
+    "current": "現在",
+    "differs": "相違あり",
+    "differsTitle": "{count, plural, other {#件が現在のデータと異なります}}",
+    "intro": "すでにあるデータはバックアップの内容と比較します。あなたが選ばない限り、置き換えられることはありません。",
+    "keep": "現在のまま",
+    "keepAll": "すべて現在のまま",
+    "liveNow": "この項目は現在ボードにありますが、バックアップではゴミ箱に入っています。",
+    "new": "新規",
+    "newTitle": "{count, plural, other {新しいデータ#件を追加します}}",
+    "nothing": "このバックアップの内容はすべて、すでに同じ状態で存在しています。復元するものはありません。",
+    "outcome": "復元後：追加{added}件、置き換え{replaced}件、そのまま{kept}件。",
+    "replace": "置き換える",
+    "replaceAll": "すべて置き換える",
+    "same": "同一",
+    "sameInfo": "{count, plural, other {#件は同一のため、そのまま残ります。}}",
+    "showAll": "すべて表示",
+    "showLess": "折りたたむ",
+    "trashedNow": "この項目は現在ゴミ箱にあります。"
+  },
+  "nav": {
+    "backup": "バックアップ",
+    "board": "ボード",
+    "boards": "ボード一覧",
+    "language": "言語",
+    "localData": "この端末に保存されます。データはあなたのものです。",
+    "mainMenu": "メインメニュー",
+    "newBoard": "新しいボードを作成",
+    "saved": "この端末に保存済み",
+    "settings": "設定",
+    "switchBoard": "ボードを切り替え",
+    "trash": "ゴミ箱",
+    "workspace": "ワークスペース"
+  },
+  "priority": {
+    "high": "高",
+    "low": "低",
+    "medium": "中"
+  },
+  "privacy": {
+    "backups": {
+      "body": "バックアップは、端末に保存されるZIPファイルです。すべてのメモが含まれ、暗号化はされていないため、メモそのものと同じように大切に保管してください。チェックサムは破損を検出できますが、ファイルの作成者までは証明できません。信頼できるバックアップだけを復元してください。",
+      "title": "バックアップ"
+    },
+    "card": {
+      "read": "ポリシー全文を読む",
+      "summary": "データはこの端末の中だけに保存されます。アカウントも、トラッキングも、外部への通信もありません。"
+    },
+    "changes": {
+      "body": "このポリシーを変更した場合は、新しい内容と日付をこのページに掲載します。",
+      "title": "変更について"
+    },
+    "control": {
+      "body": "項目の削除、ゴミ箱を空にする、ボードの削除、ブラウザ設定でのサイトデータの消去は、いつでも行えます。サイトデータを消去すると、Repoが保存したすべてが完全に消えます。残したい場合は、先にバックアップを作成してください。",
+      "title": "データはあなたが管理できます"
+    },
+    "hosting": {
+      "body": "このサイトは、GitHub Pagesを通じて静的ファイルとして配信されています。一般的なWebホスティングと同様に、GitHubはIPアドレスや時刻などの標準的なアクセスログを、GitHub自身のプライバシーステートメントに従って保持する場合があります。Repoからそのログを見ることも管理することもできません。",
+      "title": "ホスティングについて"
+    },
+    "intro": "Repoは、すべてブラウザの中で動く個人用のワークスペースです。このページでは、それがあなたのデータにとって何を意味するかを説明します。",
+    "limits": {
+      "body": "端末の空き容量が少なくなると、ブラウザがストレージを消去することがあります。また、ストレージはブラウザや端末の間では共有されません。バックアップを定期的に作成してください。",
+      "title": "知っておきたいこと"
+    },
+    "local": {
+      "body": "ボード、項目、メモ、ゴミ箱、設定は、このブラウザのストレージ（IndexedDBとlocalStorage）に保存されます。Repoにはサーバーもアカウントもクラウドのデータベースもないため、入力した内容が私たちや第三者に送られることはありません。",
+      "title": "データはあなたの端末に残ります"
+    },
+    "terms": {
+      "body": "RepoはMITライセンスのオープンソースソフトウェアです。現状のまま、いかなる保証もなく提供され、利用に伴うデータの消失や損害について、作者は責任を負いません。",
+      "title": "ライセンスと利用条件"
+    },
+    "title": "プライバシーとポリシー",
+    "tracking": {
+      "body": "Repoは、アクセス解析、広告、追跡用のCookie、外部のスクリプト・フォント・画像を一切使いません。ページは自分自身のアドレスにあるファイルだけを読み込みます。",
+      "title": "トラッキングはしません"
+    },
+    "updated": "最終更新日：{date}"
+  },
+  "restore": {
+    "apply": "変更を適用",
+    "checks": "確認内容を表示",
+    "chooseOther": "別のファイルを選ぶ",
+    "confirmAction": "適用する",
+    "confirmBody": "{name}から、{added}件を追加し、{replaced}件を置き換えます。それ以外はそのままです。",
+    "confirmTitle": "この変更を適用しますか？",
+    "created": "作成日時",
+    "createdBy": "作成したバージョン",
+    "doneBody": "選んだバックアップのデータがワークスペースに反映されました。",
+    "doneTitle": "復元が完了しました",
+    "drop": "ここにバックアップをドロップ、またはファイルを選択",
+    "hideChecks": "確認内容を隠す",
+    "hint": "ZIPファイル（25 MBまで）",
+    "intro": "Repoで作成したバックアップのZIPを選んでください。変更を加える前に、内容を詳しく確認し、現在のデータと比較します。",
+    "passphrase": "バックアップのパスフレーズ",
+    "passphraseHint": "暗号化されていないバックアップの場合は空欄にしてください。",
+    "notices": "お知らせ",
+    "records": "データ",
+    "replaceNote": "復元で既存のデータが消えることはありません。新しいデータは追加され、置き換えると選んだデータだけが上書きされます。すべて一度に適用され、検証に失敗した場合は自動で元に戻ります。",
+    "review": "復元の前に内容を確認",
+    "safety": "復元の前に、現在のデータの安全用バックアップをダウンロードする",
+    "verified": "ファイルを確認しました"
+  },
+  "search": {
+    "clear": "検索をクリア",
+    "placeholder": "項目を検索..."
+  },
+  "seed": {
+    "board": {
+      "getting-started": "はじめに"
+    },
+    "column": {
+      "completed": "完了",
+      "in-progress": "進行中",
+      "in-review": "確認中",
+      "not-started": "未着手"
+    },
+    "item": {
+      "check": {
+        "label": "確認",
+        "summary": "変わった点を振り返り、次の一歩を決めます。",
+        "title": "進み具合を確認する"
+      },
+      "create-space": {
+        "label": "一般",
+        "summary": "ボードの準備ができました。管理したいことを項目として追加しましょう。",
+        "title": "自分のスペースをつくる"
+      },
+      "define-goal": {
+        "label": "一般",
+        "summary": "何を整理したいのか、何を達成したいのかを決めましょう。",
+        "title": "目標を決める"
+      },
+      "gather": {
+        "label": "準備",
+        "summary": "役立つ情報やメモ、資料を集めます。",
+        "title": "必要なものを集める"
+      }
+    }
+  },
+  "settings": {
+    "about": "このアプリについて",
+    "appVersion": "アプリのバージョン",
+    "backupFormat": "バックアップ形式のバージョン",
+    "boards": "ボード",
+    "boardsHint": "ボード名の変更や、不要なボードの削除ができます。",
+    "cancelRename": "名前の変更をやめる",
+    "delete": "{name}を削除",
+    "deleteAnimation": "削除時のアニメーションを再生",
+    "deleteAnimationHint": "カードがゴミ箱に飛び込みます。フローティングのゴミ箱が必要です。",
+    "deleteBoardAction": "ボードを削除",
+    "deleteBoardBody": "このボードにある項目{items, plural, other {#件}}、メモ{notes, plural, other {#件}}、ゴミ箱の項目{trash, plural, other {#件}}を完全に削除します。必要になるかもしれない場合は、先にバックアップを作成してください。",
+    "deleteBoardTitle": "「{name}」を削除しますか？",
+    "language": "言語",
+    "languageHint": "日付の表記や文言は、選んだ言語に合わせて変わります。",
+    "license": "ライセンス",
+    "licenseValue": "MITライセンス",
+    "menuMoveDown": "{name}を下へ",
+    "menuMoveUp": "{name}を上へ",
+    "menuOrder": "メニューの並び順",
+    "menuOrderHint": "サイドバーと下部バーのメニューの並び順を選べます。",
+    "menuReset": "初期の並び順に戻す",
+    "rename": "{name}の名前を変更",
+    "retention": "削除した項目の保管期間",
+    "retention30": "30日間",
+    "retention7": "7日間",
+    "retentionConfirmAction": "適用して削除",
+    "retentionConfirmBody": "{count, plural, other {新しい期間より長くゴミ箱にある#件の項目が、今すぐ完全に削除されます。}}",
+    "retentionConfirmTitle": "保管期間を短くしますか？",
+    "retentionHint": "すでにゴミ箱にある項目にも適用されます。",
+    "retentionNever": "自動では削除しない",
+    "saveName": "名前を保存",
+    "schemaVersion": "データベースのスキーマバージョン",
+    "showBin": "フローティングのゴミ箱を表示",
+    "showBinHint": "ゴミ箱はメニューからいつでも開けます。",
+    "title": "設定",
+    "trash": "ゴミ箱"
+  },
+  "sort": {
+    "due": "期限順",
+    "label": "並び順",
+    "manual": "手動で並べ替え",
+    "newest": "新しい順",
+    "priority": "優先度順"
+  },
+  "stages": {
+    "add": "ステータスを追加",
+    "addPlaceholder": "新しいステータス名",
+    "color": "色",
+    "delete": "{name}を削除",
+    "deleteAction": "ステータスを削除",
+    "deleteBody": "このステータスには{count, plural, other {#件}}の項目があります。どうしますか？",
+    "deleteEmpty": "このステータスには項目がないため、そのまま削除されます。",
+    "deleteTitle": "「{name}」を削除しますか？",
+    "doneHint": "「完了」の色のステータスにある項目は、ボードの進捗に数えられます。",
+    "intro": "ステータスはボードの列になります。名前の変更や並べ替え、独自のステータスの追加ができます。",
+    "limit": "1つのボードにつき最大{max}個までです。",
+    "moveDown": "{name}を下へ",
+    "moveTarget": "移動先",
+    "moveUp": "{name}を上へ",
+    "name": "ステータス名",
+    "open": "ステータスを編集",
+    "optionMove": "別のステータスに移動",
+    "optionTrash": "ゴミ箱に移動",
+    "title": "ステータスを編集"
+  },
+  "state": {
+    "loading": "ワークスペースを開いています..."
+  },
+  "step": {
+    "apply": "変更を適用",
+    "checksum": "チェックサムを検証",
+    "collect": "データを読み取る",
+    "compare": "現在のデータと比較",
+    "compress": "ZIPに圧縮",
+    "decrypt": "バックアップを復号",
+    "encrypt": "バックアップを暗号化",
+    "metadata": "メタデータとバージョンを確認",
+    "package": "ファイルとチェックサムを作成",
+    "readFile": "ファイルを読み込む",
+    "refresh": "ワークスペースを再読み込み",
+    "safety": "安全用バックアップを保存",
+    "save": "ファイルを保存",
+    "selfcheck": "データの整合性をチェック",
+    "snapshot": "復元ポイントを作成",
+    "structure": "構造と参照関係を検証",
+    "unpack": "アーカイブを開く",
+    "verifyArchive": "作成したアーカイブを検証",
+    "verifyRestore": "復元後のデータを検証"
+  },
+  "toast": {
+    "dismiss": "通知を閉じる",
+    "itemRestored": "項目を元に戻しました",
+    "restored": "バックアップを復元しました"
+  },
+  "tone": {
+    "amber": "オレンジ",
+    "green": "完了",
+    "neutral": "グレー",
+    "violet": "紫"
+  },
+  "trash": {
+    "daysLeft": "{count, plural, other {あと#日}}",
+    "deletedOn": "{date}に削除",
+    "empty": "ゴミ箱は空です。",
+    "keptUntilDeleted": "削除するまで保管",
+    "lastDay": "あと1日未満",
+    "noNote": "メモなし",
+    "open": "ゴミ箱を開く",
+    "restoreFailed": "このボードにはステータスが残っていないため、元に戻せません。",
+    "retention": "{days}日たつと、項目は完全に削除されます。",
+    "retentionNever": "項目は、削除するまでゴミ箱に残ります。",
+    "title": "ゴミ箱"
+  },
+  "validation": {
+    "invalid": "{field}の値が正しくありません。",
+    "required": "{field}を入力してください。",
+    "tooLong": "{field}は{limit}文字までです。"
+  },
+  "view": {
+    "board": "ボード",
+    "list": "リスト"
+  },
+  "warn": {
+    "expiredTrash": "{count, plural, other {7日を過ぎたゴミ箱の項目#件をスキップしました}}",
+    "orphanNotes": "{count, plural, other {項目のないメモ#件をスキップしました}}",
+    "orphanTrash": "{count, plural, other {ボードのないゴミ箱の項目#件をスキップしました}}",
+    "renumbered": "{count, plural, other {重複をなくすため、#件のリストの並び順を振り直しました}}",
+    "unknownFields": "{count, plural, other {#件のデータにある未対応の項目を無視しました}}"
+  }
+}

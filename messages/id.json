@@ -1,0 +1,583 @@
+{
+  "action": {
+    "back": "Kembali ke tempat sampah",
+    "cancel": "Batal",
+    "close": "Tutup",
+    "create": "Buat item",
+    "deleteForever": "Hapus permanen",
+    "discard": "Buang perubahan",
+    "done": "Selesai",
+    "emptyTrash": "Kosongkan tempat sampah",
+    "keepEditing": "Lanjut mengedit",
+    "restore": "Pulihkan",
+    "save": "Simpan perubahan",
+    "trash": "Pindahkan ke tempat sampah"
+  },
+  "app": {
+    "tagline": "Ruang fleksibel untuk pekerjaan, rencana pribadi, belajar, atau kegiatan apa pun."
+  },
+  "backup": {
+    "another": "Buat cadangan lagi",
+    "doneBody": "{name} ({size}). Checksum {hash}.",
+    "doneTitle": "Cadangan tersimpan",
+    "downloadAgain": "Unduh lagi",
+    "encrypt": "Enkripsi cadangan ini dengan frasa sandi",
+    "encryptionHint": "Gunakan setidaknya 8 karakter. Frasa sandi ini diperlukan untuk memulihkan cadangan dan tidak dapat dipulihkan jika hilang.",
+    "confirmPassphrase": "Konfirmasi frasa sandi",
+    "intro": "Buat file ZIP berisi semua papan, item, catatan, dan isi tempat sampah. File ini hanya ada di perangkat Anda, jadi simpan di tempat yang aman.",
+    "keepOpen": "Jangan tutup jendela ini sampai prosesnya selesai.",
+    "passphrase": "Frasa sandi",
+    "passphraseMismatch": "Frasa sandi tidak cocok.",
+    "start": "Buat cadangan",
+    "tabBackup": "Cadangkan",
+    "tabRestore": "Pulihkan",
+    "title": "Cadangkan dan pulihkan"
+  },
+  "board": {
+    "completed": "{total, plural, other {{done} dari # item selesai}}",
+    "create": "Buat papan",
+    "createTitle": "Buat papan baru",
+    "glance": "Ringkasan papan Anda",
+    "hintDrag": "Seret untuk mengubah urutan. Ketuk item untuk mengeditnya.",
+    "hintLocked": "Hapus pencarian, filter, dan pengurutan agar urutan item bisa diubah.",
+    "nameLabel": "Nama papan",
+    "namePlaceholder": "Contoh: Renovasi rumah",
+    "newItem": "Item baru",
+    "noMatches": "Tidak ada item yang cocok dengan pencarian Anda.",
+    "progress": "Kemajuan papan"
+  },
+  "confirm": {
+    "discardBody": "Perubahan pada item ini belum disimpan.",
+    "discardTitle": "Buang perubahan ini?",
+    "emptyBody": "{count, plural, other {# item di tempat sampah akan dihapus permanen. Tindakan ini tidak bisa dibatalkan.}}",
+    "emptyTitle": "Kosongkan tempat sampah?",
+    "foreverBody": "Tindakan ini tidak bisa dibatalkan.",
+    "foreverTitle": "Hapus item ini secara permanen?"
+  },
+  "date": {
+    "clear": "Hapus",
+    "next": "Bulan berikutnya",
+    "pick": "Pilih tanggal",
+    "prev": "Bulan sebelumnya",
+    "today": "Hari ini"
+  },
+  "detail": {
+    "applied": "{total} data ditulis dalam satu transaksi atomik",
+    "archiveVerified": "Arsip dibaca ulang: checksum cocok dan {total} data sesuai",
+    "checksum": "SHA-256 {hash}... cocok, {stores} penyimpanan terkonfirmasi",
+    "collected": "{boards, plural, other {# papan}}, {columns, plural, other {# tahap}}, {items, plural, other {# item}}, {notes, plural, other {# catatan}}, {trash, plural, other {# item}} di tempat sampah",
+    "compared": "{added} baru, {same} sama persis, {differs} berbeda",
+    "compressed": "{size} setelah dikompresi dari {original}",
+    "decrypted": "Data cadangan berhasil didekripsi",
+    "decryptionSkipped": "Cadangan ini tidak dienkripsi",
+    "encrypted": "Data cadangan dienkripsi dengan frasa sandi Anda",
+    "encryptionSkipped": "Tanpa enkripsi frasa sandi",
+    "metadata": "Format {format}, dibuat {date} oleh Repo {version}",
+    "packaged": "data.json {size}, SHA-256 {hash}...",
+    "read": "{name}, {size}",
+    "refreshed": "Ruang kerja dimuat ulang",
+    "restoreVerified": "Pemeriksaan integritas lolos",
+    "safetySkipped": "Dilewati sesuai pilihan Anda",
+    "saved": "{name}",
+    "snapshot": "{total} data saat ini disimpan sementara di memori",
+    "unpacked": "Hanya berisi manifest.json dan data.json",
+    "valid": "Semua {total} data lolos pemeriksaan",
+    "validNotices": "{total} data lolos, {count} catatan"
+  },
+  "diff": {
+    "board": "Papan",
+    "chars": "{count} karakter",
+    "dueDate": "Tenggat",
+    "expires": "Dihapus permanen pada",
+    "inTrash": "Di tempat sampah",
+    "label": "Label",
+    "location": "Lokasi",
+    "name": "Nama",
+    "none": "Kosong",
+    "note": "Catatan",
+    "onBoard": "Di papan",
+    "priority": "Prioritas",
+    "stage": "Tahap",
+    "summary": "Ringkasan",
+    "title": "Judul",
+    "tone": "Warna",
+    "value": "Nilai"
+  },
+  "err": {
+    "BACKUP_APPLY_FAILED": {
+      "hint": "Tidak ada yang berubah. Data Anda yang lama tetap utuh.",
+      "title": "Pemulihan gagal"
+    },
+    "BACKUP_ARCHIVE_INVALID": {
+      "hint": "File tidak disimpan karena tidak bisa dipulihkan. Coba lagi.",
+      "title": "Cadangan baru gagal diverifikasi"
+    },
+    "BACKUP_CHECKSUM_MISMATCH": {
+      "hint": "Checksum tidak cocok. File berubah setelah dibuat atau rusak saat dipindahkan.",
+      "title": "Cadangan rusak"
+    },
+    "BACKUP_COLLECT_FAILED": {
+      "hint": "Muat ulang halaman lalu coba lagi.",
+      "title": "Data Anda tidak bisa dibaca"
+    },
+    "BACKUP_CRYPTO_UNAVAILABLE": {
+      "hint": "Buka Repo lewat HTTPS atau localhost. Di tempat lain, browser menonaktifkan hashing yang aman.",
+      "title": "Checksum tidak tersedia"
+    },
+    "BACKUP_DECRYPT_FAILED": {
+      "hint": "Periksa frasa sandi dan pastikan file cadangan belum diubah atau rusak.",
+      "title": "Cadangan tidak dapat didekripsi"
+    },
+    "BACKUP_DOWNLOAD_FAILED": {
+      "hint": "Browser memblokir unduhan. Gunakan Unduh lagi, atau izinkan unduhan untuk situs ini.",
+      "title": "File tidak bisa disimpan"
+    },
+    "BACKUP_FILE_READ_FAILED": {
+      "hint": "Pilih file itu lagi, atau salin dulu ke perangkat ini.",
+      "title": "File tidak bisa dibaca"
+    },
+    "BACKUP_FILE_TOO_LARGE": {
+      "hint": "Cadangan di atas 25 MB ditolak untuk melindungi perangkat Anda.",
+      "title": "File terlalu besar"
+    },
+    "BACKUP_MANIFEST_INVALID": {
+      "hint": "Manifest hilang, tidak terbaca, atau berasal dari aplikasi lain.",
+      "title": "Ini bukan cadangan Repo yang bisa dibaca"
+    },
+    "BACKUP_MERGE_INVALID": {
+      "hint": "Penggabungan akan membuat data tidak konsisten, jadi tidak ada yang diubah. Lihat detail teknis.",
+      "title": "Kombinasi pilihan ini tidak bisa diterapkan"
+    },
+    "BACKUP_NOT_ZIP": {
+      "hint": "Pilih file .zip buatan Repo. File ini mungkin rusak atau tidak lengkap.",
+      "title": "Ini bukan arsip ZIP yang valid"
+    },
+    "BACKUP_PACKAGE_FAILED": {
+      "hint": "Coba lagi. Jika terus gagal, muat ulang halaman.",
+      "title": "File cadangan gagal dibuat"
+    },
+    "BACKUP_PASSWORD_REQUIRED": {
+      "hint": "Masukkan frasa sandi yang digunakan saat cadangan ini dibuat.",
+      "title": "Frasa sandi diperlukan"
+    },
+    "BACKUP_PASSWORD_TOO_SHORT": {
+      "hint": "Gunakan frasa sandi dengan setidaknya 8 karakter.",
+      "title": "Frasa sandi terlalu pendek"
+    },
+    "BACKUP_ROLLBACK_FAILED": {
+      "hint": "Pulihkan file cadangan pengaman yang diunduh sebelum langkah ini.",
+      "title": "Pemulihan tidak bisa diselesaikan maupun dibatalkan"
+    },
+    "BACKUP_SELFCHECK_FAILED": {
+      "hint": "Data tersimpan memiliki ketidakkonsistenan, jadi tidak ada cadangan yang dibuat. Lihat detail teknis.",
+      "title": "Data Anda tidak lolos pemeriksaan sebelum pencadangan"
+    },
+    "BACKUP_SIZE_MISMATCH": {
+      "hint": "Ukuran file data tidak sesuai dengan manifest. Unduh cadangannya lagi.",
+      "title": "Cadangan tidak lengkap"
+    },
+    "BACKUP_STALE": {
+      "hint": "Tidak ada yang dipulihkan. Mulai pemulihan lagi agar perbandingannya terbaru.",
+      "title": "Data Anda berubah saat peninjauan"
+    },
+    "BACKUP_STRUCTURE_INVALID": {
+      "hint": "Sebagian data melanggar aturan Repo, jadi tidak ada yang dipulihkan. Lihat detail teknis.",
+      "title": "Data cadangan tidak valid"
+    },
+    "BACKUP_UNEXPECTED_CONTENT": {
+      "hint": "Cadangan Repo hanya berisi manifest.json dan data.json. File ini sudah diubah atau bukan cadangan Repo.",
+      "title": "Isi arsip tidak sesuai"
+    },
+    "BACKUP_UNSUPPORTED_VERSION": {
+      "hint": "Perbarui Repo, lalu coba lagi.",
+      "title": "Cadangan ini dibuat oleh versi yang lebih baru"
+    },
+    "BACKUP_VERIFY_FAILED": {
+      "hint": "Data hasil pemulihan tidak lolos verifikasi, jadi data lama Anda dikembalikan.",
+      "title": "Pemulihan dibatalkan"
+    },
+    "DATA_INTEGRITY": {
+      "hint": "Buat cadangan sekarang, lalu salin diagnostik untuk melihat rinciannya.",
+      "title": "Sebagian data tampak tidak konsisten"
+    },
+    "LAST_BOARD": {
+      "hint": "Buat papan lain dulu, lalu hapus yang ini.",
+      "title": "Anda perlu minimal satu papan"
+    },
+    "LAST_STAGE": {
+      "hint": "Tambahkan tahap lain dulu, lalu hapus yang ini.",
+      "title": "Papan harus punya minimal satu tahap"
+    },
+    "LIMIT_REACHED": {
+      "hint": "Hapus yang sudah tidak dipakai, lalu coba lagi.",
+      "title": "Batas tercapai"
+    },
+    "PREFS_UNAVAILABLE": {
+      "hint": "Browser Anda memblokir penyimpanan pengaturan kecil. Repo tetap berfungsi, tetapi tidak mengingat papan terakhir Anda.",
+      "title": "Preferensi tidak bisa disimpan"
+    },
+    "RENDER_CRASH": {
+      "hint": "Data Anda aman. Muat ulang halaman untuk melanjutkan.",
+      "title": "Layar ini mengalami masalah"
+    },
+    "STORAGE_CLOSED": {
+      "hint": "Repo mungkin terbuka di tab lain yang baru diperbarui. Muat ulang halaman ini.",
+      "title": "Penyimpanan tertutup"
+    },
+    "STORAGE_FAILED": {
+      "hint": "Tidak ada data yang hilang. Coba lagi.",
+      "title": "Gagal menyimpan ke penyimpanan lokal"
+    },
+    "STORAGE_QUOTA": {
+      "hint": "Kosongkan sebagian ruang atau tempat sampah, lalu coba lagi.",
+      "title": "Ruang penyimpanan perangkat penuh"
+    },
+    "STORAGE_UNAVAILABLE": {
+      "hint": "Repo menyimpan data di browser ini. Izinkan data situs, keluar dari mode privat, lalu muat ulang.",
+      "title": "Penyimpanan lokal tidak tersedia"
+    },
+    "UNEXPECTED": {
+      "hint": "Data Anda aman di perangkat ini. Coba lagi, atau muat ulang halaman jika masalahnya berulang.",
+      "title": "Terjadi masalah yang tak terduga"
+    },
+    "VALIDATION": {
+      "hint": "Ada isian yang tidak diperbolehkan.",
+      "title": "Periksa isian Anda"
+    }
+  },
+  "error": {
+    "copied": "Tersalin",
+    "copy": "Salin diagnostik",
+    "copyFailed": "Gagal menyalin",
+    "generic": "Terjadi kesalahan. Coba lagi.",
+    "noteLoad": "Catatan gagal dimuat, jadi pengeditan dikunci agar isinya tidak tertimpa.",
+    "reload": "Muat ulang halaman",
+    "required": "Judul wajib diisi.",
+    "retry": "Coba lagi",
+    "technical": "Detail teknis"
+  },
+  "field": {
+    "boardName": "Nama papan",
+    "column": "Tahap",
+    "columnName": "Nama tahap",
+    "columnTone": "Warna",
+    "dueDate": "Tenggat",
+    "label": "Label",
+    "note": "Catatan",
+    "priority": "Prioritas",
+    "summary": "Ringkasan",
+    "title": "Judul"
+  },
+  "filter": {
+    "all": "Semua prioritas",
+    "priority": "Prioritas"
+  },
+  "item": {
+    "add": "Tambah item",
+    "addTo": "Tambah item ke {stage}",
+    "details": "Detail item",
+    "dueDate": "Tenggat",
+    "emptyColumn": "Belum ada apa-apa di sini",
+    "label": "Label",
+    "labelPlaceholder": "Umum",
+    "new": "Item baru",
+    "noDue": "Tanpa tenggat",
+    "note": "Catatan",
+    "noteCount": "{count} / {max}",
+    "noteLoading": "Memuat catatan...",
+    "notePlaceholder": "Tulis detail, tautan, atau apa pun yang ingin Anda ingat...",
+    "priority": "Prioritas",
+    "stage": "Tahap",
+    "summary": "Ringkasan",
+    "summaryPlaceholder": "Deskripsi singkat",
+    "title": "Judul",
+    "titlePlaceholder": "Apa yang perlu dikerjakan?"
+  },
+  "kind": {
+    "board": "Papan",
+    "column": "Tahap",
+    "item": "Item",
+    "note": "Catatan",
+    "setting": "Pengaturan",
+    "trash": "Tempat sampah"
+  },
+  "legal": {
+    "backToApp": "Kembali ke Repo",
+    "license": "Lisensi MIT",
+    "privacy": "Privasi & Kebijakan",
+    "version": "Versi {version}"
+  },
+  "merge": {
+    "andMore": "dan {count} lainnya",
+    "backup": "Cadangan",
+    "current": "Sekarang",
+    "differs": "Berbeda",
+    "differsTitle": "{count, plural, other {# data berbeda dari data Anda saat ini}}",
+    "intro": "Data yang sudah ada di sini dibandingkan dengan isi cadangan. Tidak ada yang diganti kecuali Anda memilihnya.",
+    "keep": "Pertahankan yang sekarang",
+    "keepAll": "Pertahankan semua yang sekarang",
+    "liveNow": "Item ini sekarang ada di papan Anda, tetapi di cadangan item ini ada di tempat sampah.",
+    "new": "Baru",
+    "newTitle": "{count, plural, other {# data baru akan ditambahkan}}",
+    "nothing": "Semua isi cadangan ini sudah ada dan sama persis. Tidak ada yang perlu dipulihkan.",
+    "outcome": "Setelah dipulihkan: {added} ditambahkan, {replaced} diganti, {kept} dibiarkan.",
+    "replace": "Ganti",
+    "replaceAll": "Ganti semua",
+    "same": "Sama persis",
+    "sameInfo": "{count, plural, other {# data sama persis dan dibiarkan seperti sekarang.}}",
+    "showAll": "Tampilkan semua",
+    "showLess": "Tampilkan lebih sedikit",
+    "trashedNow": "Item ini sekarang ada di tempat sampah Anda."
+  },
+  "nav": {
+    "backup": "Cadangan",
+    "board": "Papan",
+    "boards": "Papan Anda",
+    "language": "Bahasa",
+    "localData": "Disimpan di perangkat ini. Data milik Anda.",
+    "mainMenu": "Menu utama",
+    "newBoard": "Buat papan baru",
+    "saved": "Tersimpan di perangkat ini",
+    "settings": "Pengaturan",
+    "switchBoard": "Ganti papan",
+    "trash": "Tempat sampah",
+    "workspace": "Ruang kerja"
+  },
+  "priority": {
+    "high": "Tinggi",
+    "low": "Rendah",
+    "medium": "Sedang"
+  },
+  "privacy": {
+    "backups": {
+      "body": "Cadangan adalah file ZIP yang disimpan di perangkat Anda. Isinya mencakup semua catatan Anda dan tidak dienkripsi, jadi simpanlah sama hati-hatinya dengan catatan itu sendiri. Checksum mendeteksi kerusakan, tetapi tidak membuktikan siapa pembuat file, sehingga pulihkan hanya cadangan yang Anda percaya.",
+      "title": "Cadangan"
+    },
+    "card": {
+      "read": "Baca kebijakan lengkap",
+      "summary": "Data Anda tetap di perangkat ini. Repo tidak memakai akun, pelacakan, atau permintaan ke pihak ketiga."
+    },
+    "changes": {
+      "body": "Jika kebijakan ini berubah, versi terbaru beserta tanggalnya akan ditampilkan di halaman ini.",
+      "title": "Perubahan"
+    },
+    "control": {
+      "body": "Kapan saja, Anda bisa menghapus item, mengosongkan tempat sampah, menghapus papan, atau membersihkan data situs ini lewat pengaturan browser. Membersihkan data situs menghapus semua yang disimpan Repo secara permanen, jadi buat cadangan lebih dulu jika ingin menyimpannya.",
+      "title": "Kendali ada di tangan Anda"
+    },
+    "hosting": {
+      "body": "Situs ini disajikan sebagai file statis lewat GitHub Pages. Seperti penyedia hosting lain, GitHub dapat menyimpan log teknis standar atas permintaan yang masuk, misalnya alamat IP dan waktu, sesuai kebijakan privasinya sendiri. Repo tidak dapat melihat atau mengatur log tersebut.",
+      "title": "Hosting"
+    },
+    "intro": "Repo adalah ruang kerja pribadi yang berjalan sepenuhnya di browser Anda. Halaman ini menjelaskan artinya bagi data Anda.",
+    "limits": {
+      "body": "Browser dapat mengosongkan penyimpanannya saat ruang perangkat menipis, dan penyimpanan tidak dibagikan antar browser atau antar perangkat. Buatlah cadangan secara berkala.",
+      "title": "Perlu diketahui"
+    },
+    "local": {
+      "body": "Papan, item, catatan, tempat sampah, dan pengaturan Anda disimpan di penyimpanan browser ini (IndexedDB dan localStorage). Repo tidak punya server, akun, atau database cloud, jadi apa pun yang Anda tulis tidak dikirim kepada kami maupun pihak lain.",
+      "title": "Data Anda tetap di perangkat Anda"
+    },
+    "terms": {
+      "body": "Repo bersifat sumber terbuka di bawah Lisensi MIT. Aplikasi ini disediakan apa adanya tanpa jaminan apa pun, dan pembuatnya tidak bertanggung jawab atas kehilangan data atau kerugian akibat penggunaannya.",
+      "title": "Lisensi dan ketentuan"
+    },
+    "title": "Privasi & Kebijakan",
+    "tracking": {
+      "body": "Repo tidak memakai analitik, iklan, cookie pelacak, maupun skrip, font, dan gambar dari pihak ketiga. Halaman hanya memuat file dari alamatnya sendiri.",
+      "title": "Tanpa pelacakan"
+    },
+    "updated": "Terakhir diperbarui: {date}"
+  },
+  "restore": {
+    "apply": "Terapkan perubahan",
+    "checks": "Lihat pemeriksaan",
+    "chooseOther": "Pilih file lain",
+    "confirmAction": "Terapkan perubahan",
+    "confirmBody": "Dari {name}: {added} ditambahkan dan {replaced} diganti. Selebihnya tetap seperti sekarang.",
+    "confirmTitle": "Terapkan perubahan ini?",
+    "created": "Dibuat",
+    "createdBy": "Dibuat oleh",
+    "doneBody": "Data cadangan yang Anda pilih kini sudah ada di ruang kerja Anda.",
+    "doneTitle": "Cadangan dipulihkan",
+    "drop": "Letakkan cadangan di sini atau pilih file",
+    "hideChecks": "Sembunyikan pemeriksaan",
+    "hint": "File ZIP, maksimal 25 MB",
+    "intro": "Pilih file ZIP cadangan buatan Repo. File diperiksa lengkap dan dibandingkan dengan data Anda sebelum ada yang berubah.",
+    "passphrase": "Frasa sandi cadangan",
+    "passphraseHint": "Kosongkan untuk cadangan yang tidak dienkripsi.",
+    "notices": "Catatan",
+    "records": "Data",
+    "replaceNote": "Pemulihan tidak pernah menghapus data yang sudah ada. Data baru ditambahkan, dan data yang Anda pilih untuk diganti akan ditimpa. Semua diterapkan sekaligus dan otomatis dibatalkan jika verifikasi gagal.",
+    "review": "Tinjau sebelum memulihkan",
+    "safety": "Unduh cadangan pengaman dari data saya saat ini terlebih dahulu",
+    "verified": "File terverifikasi"
+  },
+  "search": {
+    "clear": "Hapus pencarian",
+    "placeholder": "Cari item..."
+  },
+  "seed": {
+    "board": {
+      "getting-started": "Mulai di sini"
+    },
+    "column": {
+      "completed": "Selesai",
+      "in-progress": "Sedang dikerjakan",
+      "in-review": "Ditinjau",
+      "not-started": "Belum dimulai"
+    },
+    "item": {
+      "check": {
+        "label": "Tinjauan",
+        "summary": "Lihat apa yang sudah berubah, lalu tentukan langkah berikutnya.",
+        "title": "Periksa kemajuan Anda"
+      },
+      "create-space": {
+        "label": "Umum",
+        "summary": "Papan Anda sudah siap. Tambahkan item untuk apa pun yang ingin dipantau.",
+        "title": "Siapkan ruang Anda"
+      },
+      "define-goal": {
+        "label": "Umum",
+        "summary": "Putuskan apa yang ingin Anda atur atau capai.",
+        "title": "Tentukan tujuan Anda"
+      },
+      "gather": {
+        "label": "Persiapan",
+        "summary": "Siapkan informasi, catatan, atau bahan yang berguna.",
+        "title": "Kumpulkan yang diperlukan"
+      }
+    }
+  },
+  "settings": {
+    "about": "Tentang",
+    "appVersion": "Versi aplikasi",
+    "backupFormat": "Versi format cadangan",
+    "boards": "Papan",
+    "boardsHint": "Ganti nama papan atau hapus yang tidak lagi dipakai.",
+    "cancelRename": "Batal mengganti nama",
+    "delete": "Hapus {name}",
+    "deleteAnimation": "Putar animasi saat menghapus",
+    "deleteAnimationHint": "Kartu terbang masuk ke tempat sampah. Perlu tempat sampah melayang.",
+    "deleteBoardAction": "Hapus papan",
+    "deleteBoardBody": "Ini akan menghapus permanen {items, plural, other {# item}}, {notes, plural, other {# catatan}}, dan {trash, plural, other {# item di tempat sampah}} di papan ini. Buat cadangan dulu jika Anda mungkin masih memerlukannya.",
+    "deleteBoardTitle": "Hapus \"{name}\"?",
+    "language": "Bahasa",
+    "languageHint": "Tanggal dan teks mengikuti bahasa yang Anda pilih.",
+    "license": "Lisensi",
+    "licenseValue": "Lisensi MIT",
+    "menuMoveDown": "Turunkan {name}",
+    "menuMoveUp": "Naikkan {name}",
+    "menuOrder": "Urutan menu",
+    "menuOrderHint": "Atur urutan menu di bilah samping dan bilah bawah.",
+    "menuReset": "Kembalikan urutan awal",
+    "rename": "Ganti nama {name}",
+    "retention": "Simpan item yang dihapus selama",
+    "retention30": "30 hari",
+    "retention7": "7 hari",
+    "retentionConfirmAction": "Terapkan dan hapus",
+    "retentionConfirmBody": "{count, plural, other {# item sudah lebih lama dari batas itu di tempat sampah dan akan langsung dihapus permanen.}}",
+    "retentionConfirmTitle": "Persingkat masa penyimpanan item?",
+    "retentionHint": "Berlaku juga untuk item yang sudah ada di tempat sampah.",
+    "retentionNever": "Jangan hapus otomatis",
+    "saveName": "Simpan nama",
+    "schemaVersion": "Versi skema database",
+    "showBin": "Tampilkan tempat sampah melayang",
+    "showBinHint": "Tempat sampah tetap bisa dibuka lewat menu.",
+    "title": "Pengaturan",
+    "trash": "Tempat sampah"
+  },
+  "sort": {
+    "due": "Tenggat",
+    "label": "Urutkan",
+    "manual": "Urutan manual",
+    "newest": "Terbaru di atas",
+    "priority": "Prioritas"
+  },
+  "stages": {
+    "add": "Tambah tahap",
+    "addPlaceholder": "Nama tahap baru",
+    "color": "Warna",
+    "delete": "Hapus {name}",
+    "deleteAction": "Hapus tahap",
+    "deleteBody": "Ada {count, plural, other {# item}} di tahap ini. Mau diapakan?",
+    "deleteEmpty": "Tahap ini tidak berisi item, jadi akan langsung dihapus.",
+    "deleteTitle": "Hapus \"{name}\"?",
+    "doneHint": "Item di tahap berwarna Selesai dihitung sebagai kemajuan papan.",
+    "intro": "Tahap adalah kolom di papan Anda. Ganti namanya, ubah urutannya, atau tambahkan tahap sendiri.",
+    "limit": "Maksimal {max} tahap per papan.",
+    "moveDown": "Turunkan {name}",
+    "moveTarget": "Pindahkan ke",
+    "moveUp": "Naikkan {name}",
+    "name": "Nama tahap",
+    "open": "Atur tahap",
+    "optionMove": "Pindahkan ke tahap lain",
+    "optionTrash": "Pindahkan ke tempat sampah",
+    "title": "Atur tahap"
+  },
+  "state": {
+    "loading": "Membuka ruang kerja Anda..."
+  },
+  "step": {
+    "apply": "Menerapkan perubahan",
+    "checksum": "Memverifikasi checksum",
+    "collect": "Membaca data Anda",
+    "compare": "Membandingkan dengan data Anda saat ini",
+    "compress": "Mengompresi menjadi ZIP",
+    "decrypt": "Mendekripsi cadangan",
+    "encrypt": "Mengenkripsi cadangan",
+    "metadata": "Memeriksa metadata dan versi",
+    "package": "Menyusun file dan checksum",
+    "readFile": "Membaca file",
+    "refresh": "Memuat ulang ruang kerja",
+    "safety": "Menyimpan cadangan pengaman",
+    "save": "Menyimpan file",
+    "selfcheck": "Memeriksa konsistensi data",
+    "snapshot": "Membuat titik pemulihan",
+    "structure": "Memeriksa struktur dan relasi data",
+    "unpack": "Membuka arsip",
+    "verifyArchive": "Memverifikasi arsip baru",
+    "verifyRestore": "Memverifikasi data hasil pemulihan"
+  },
+  "toast": {
+    "dismiss": "Tutup notifikasi",
+    "itemRestored": "Item dipulihkan",
+    "restored": "Cadangan berhasil dipulihkan"
+  },
+  "tone": {
+    "amber": "Kuning",
+    "green": "Selesai",
+    "neutral": "Netral",
+    "violet": "Ungu"
+  },
+  "trash": {
+    "daysLeft": "{count, plural, other {# hari lagi}}",
+    "deletedOn": "Dihapus {date}",
+    "empty": "Tempat sampah kosong.",
+    "keptUntilDeleted": "Disimpan sampai Anda hapus",
+    "lastDay": "Kurang dari sehari lagi",
+    "noNote": "Tanpa catatan",
+    "open": "Buka tempat sampah",
+    "restoreFailed": "Item ini tidak bisa dipulihkan karena papannya sudah tidak punya tahap.",
+    "retention": "Item dihapus permanen setelah {days} hari.",
+    "retentionNever": "Item tetap di tempat sampah sampai Anda menghapusnya.",
+    "title": "Tempat sampah"
+  },
+  "validation": {
+    "invalid": "{field} tidak valid.",
+    "required": "{field} wajib diisi.",
+    "tooLong": "{field} maksimal {limit} karakter."
+  },
+  "view": {
+    "board": "Papan",
+    "list": "Daftar"
+  },
+  "warn": {
+    "expiredTrash": "{count, plural, other {# item di tempat sampah yang sudah lewat 7 hari dilewati}}",
+    "orphanNotes": "{count, plural, other {# catatan tanpa item dilewati}}",
+    "orphanTrash": "{count, plural, other {# item di tempat sampah tanpa papan dilewati}}",
+    "renumbered": "{count, plural, other {Urutan di # daftar diberi nomor ulang untuk menghilangkan duplikat}}",
+    "unknownFields": "{count, plural, other {Kolom tak dikenal di # data diabaikan}}"
+  }
+}

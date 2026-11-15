@@ -1,0 +1,583 @@
+{
+  "action": {
+    "back": "Back to trash",
+    "cancel": "Cancel",
+    "close": "Close",
+    "create": "Create item",
+    "deleteForever": "Delete forever",
+    "discard": "Discard changes",
+    "done": "Done",
+    "emptyTrash": "Empty trash",
+    "keepEditing": "Keep editing",
+    "restore": "Restore",
+    "save": "Save changes",
+    "trash": "Move to trash"
+  },
+  "app": {
+    "tagline": "A flexible space for work, personal plans, learning, or any activity."
+  },
+  "backup": {
+    "another": "Create another backup",
+    "doneBody": "{name} ({size}). Checksum {hash}.",
+    "doneTitle": "Backup saved",
+    "downloadAgain": "Download again",
+    "encrypt": "Encrypt this backup with a passphrase",
+    "encryptionHint": "Use at least 8 characters. You will need this passphrase to restore the backup; it cannot be recovered.",
+    "confirmPassphrase": "Confirm passphrase",
+    "intro": "Create a ZIP file with all boards, items, notes and trash. It stays on your device. Keep it somewhere safe.",
+    "keepOpen": "Keep this window open until the process finishes.",
+    "passphrase": "Passphrase",
+    "passphraseMismatch": "The passphrases do not match.",
+    "start": "Create backup",
+    "tabBackup": "Back up",
+    "tabRestore": "Restore",
+    "title": "Backup and restore"
+  },
+  "board": {
+    "completed": "{total, plural, one {{done} of # item completed} other {{done} of # items completed}}",
+    "create": "Create board",
+    "createTitle": "Create a new board",
+    "glance": "Your board at a glance",
+    "hintDrag": "Drag to rearrange. Select an item to edit.",
+    "hintLocked": "Clear search, filter and sorting to rearrange items.",
+    "nameLabel": "Board name",
+    "namePlaceholder": "For example: Home renovation",
+    "newItem": "New item",
+    "noMatches": "No items match your search.",
+    "progress": "Board progress"
+  },
+  "confirm": {
+    "discardBody": "Your edits to this item have not been saved.",
+    "discardTitle": "Discard your changes?",
+    "emptyBody": "{count, plural, one {# item in the trash will be deleted forever. This cannot be undone.} other {# items in the trash will be deleted forever. This cannot be undone.}}",
+    "emptyTitle": "Empty the trash?",
+    "foreverBody": "This cannot be undone.",
+    "foreverTitle": "Delete this item forever?"
+  },
+  "date": {
+    "clear": "Clear",
+    "next": "Next month",
+    "pick": "Pick a date",
+    "prev": "Previous month",
+    "today": "Today"
+  },
+  "detail": {
+    "applied": "{total} records written in one atomic transaction",
+    "archiveVerified": "Re-read the archive: checksums and {total} records match",
+    "checksum": "SHA-256 {hash}... matches, {stores} stores confirmed",
+    "collected": "{boards, plural, one {# board} other {# boards}}, {columns, plural, one {# stage} other {# stages}}, {items, plural, one {# item} other {# items}}, {notes, plural, one {# note} other {# notes}}, {trash, plural, one {# item} other {# items}} in the trash",
+    "compared": "{added} new, {same} identical, {differs} different",
+    "compressed": "{size} compressed from {original}",
+    "decrypted": "Backup data decrypted",
+    "decryptionSkipped": "This backup is not encrypted",
+    "encrypted": "Backup data encrypted with your passphrase",
+    "encryptionSkipped": "No passphrase encryption",
+    "metadata": "Format {format}, created {date} by Repo {version}",
+    "packaged": "data.json {size}, SHA-256 {hash}...",
+    "read": "{name}, {size}",
+    "refreshed": "Workspace reloaded",
+    "restoreVerified": "Integrity check passed",
+    "safetySkipped": "Skipped by your choice",
+    "saved": "{name}",
+    "snapshot": "{total} current records held in memory",
+    "unpacked": "Found manifest.json and data.json only",
+    "valid": "All {total} records passed validation",
+    "validNotices": "{total} records passed, {count} notices"
+  },
+  "diff": {
+    "board": "Board",
+    "chars": "{count} characters",
+    "dueDate": "Due date",
+    "expires": "Deleted forever on",
+    "inTrash": "In the trash",
+    "label": "Label",
+    "location": "Location",
+    "name": "Name",
+    "none": "Empty",
+    "note": "Note",
+    "onBoard": "On the board",
+    "priority": "Priority",
+    "stage": "Stage",
+    "summary": "Summary",
+    "title": "Title",
+    "tone": "Color",
+    "value": "Value"
+  },
+  "err": {
+    "BACKUP_APPLY_FAILED": {
+      "hint": "Nothing was changed. Your previous data is untouched.",
+      "title": "Restore failed"
+    },
+    "BACKUP_ARCHIVE_INVALID": {
+      "hint": "The file was not saved because it could not be restored. Try again.",
+      "title": "The new backup failed verification"
+    },
+    "BACKUP_CHECKSUM_MISMATCH": {
+      "hint": "The checksum does not match. The file changed after it was created or was damaged in transfer.",
+      "title": "The backup is corrupted"
+    },
+    "BACKUP_COLLECT_FAILED": {
+      "hint": "Reload the page and try again.",
+      "title": "Your data could not be read"
+    },
+    "BACKUP_CRYPTO_UNAVAILABLE": {
+      "hint": "Open Repo over HTTPS or localhost. Browsers disable secure hashing elsewhere.",
+      "title": "Checksums are not available"
+    },
+    "BACKUP_DECRYPT_FAILED": {
+      "hint": "Check the passphrase and make sure the backup file has not been changed or damaged.",
+      "title": "The backup could not be decrypted"
+    },
+    "BACKUP_DOWNLOAD_FAILED": {
+      "hint": "Your browser blocked the download. Use Download again, or allow downloads for this site.",
+      "title": "The file could not be saved"
+    },
+    "BACKUP_FILE_READ_FAILED": {
+      "hint": "Choose the file again, or copy it to this device first.",
+      "title": "The file could not be read"
+    },
+    "BACKUP_FILE_TOO_LARGE": {
+      "hint": "Backups larger than 25 MB are rejected to protect your device.",
+      "title": "This file is too large"
+    },
+    "BACKUP_MANIFEST_INVALID": {
+      "hint": "The manifest is missing, unreadable or from another app.",
+      "title": "This is not a readable Repo backup"
+    },
+    "BACKUP_MERGE_INVALID": {
+      "hint": "Merging would leave inconsistent data, so nothing was changed. See the technical details.",
+      "title": "The chosen combination cannot be applied"
+    },
+    "BACKUP_NOT_ZIP": {
+      "hint": "Pick a .zip created by Repo. The file may be damaged or incomplete.",
+      "title": "This is not a valid ZIP archive"
+    },
+    "BACKUP_PACKAGE_FAILED": {
+      "hint": "Try again. If it keeps failing, reload the page.",
+      "title": "The backup file could not be built"
+    },
+    "BACKUP_PASSWORD_REQUIRED": {
+      "hint": "Enter the passphrase that was used when this backup was created.",
+      "title": "A passphrase is required"
+    },
+    "BACKUP_PASSWORD_TOO_SHORT": {
+      "hint": "Choose a passphrase with at least 8 characters.",
+      "title": "The passphrase is too short"
+    },
+    "BACKUP_ROLLBACK_FAILED": {
+      "hint": "Restore the safety backup file that was downloaded before this step.",
+      "title": "Restore could not be completed or undone"
+    },
+    "BACKUP_SELFCHECK_FAILED": {
+      "hint": "The stored data has inconsistencies, so no backup was written. See the technical details.",
+      "title": "Your data failed the pre-backup check"
+    },
+    "BACKUP_SIZE_MISMATCH": {
+      "hint": "The data file size does not match its manifest. Download the backup again.",
+      "title": "The backup is incomplete"
+    },
+    "BACKUP_STALE": {
+      "hint": "Nothing was restored. Start the restore again so the comparison is up to date.",
+      "title": "Your data changed during the review"
+    },
+    "BACKUP_STRUCTURE_INVALID": {
+      "hint": "Some records break Repo's rules, so nothing was restored. See the technical details.",
+      "title": "The backup data is not valid"
+    },
+    "BACKUP_UNEXPECTED_CONTENT": {
+      "hint": "A Repo backup holds only manifest.json and data.json. This file was changed or is not a Repo backup.",
+      "title": "The archive has unexpected contents"
+    },
+    "BACKUP_UNSUPPORTED_VERSION": {
+      "hint": "Update Repo, then try again.",
+      "title": "This backup comes from a newer version"
+    },
+    "BACKUP_VERIFY_FAILED": {
+      "hint": "The restored data did not pass verification, so your previous data was put back.",
+      "title": "Restore was rolled back"
+    },
+    "DATA_INTEGRITY": {
+      "hint": "Create a backup now, then copy the diagnostics for details.",
+      "title": "Some stored data looks inconsistent"
+    },
+    "LAST_BOARD": {
+      "hint": "Create another board first, then delete this one.",
+      "title": "You need at least one board"
+    },
+    "LAST_STAGE": {
+      "hint": "Add another stage first, then delete this one.",
+      "title": "A board needs at least one stage"
+    },
+    "LIMIT_REACHED": {
+      "hint": "Remove something you no longer need and try again.",
+      "title": "Limit reached"
+    },
+    "PREFS_UNAVAILABLE": {
+      "hint": "Your browser blocks small settings storage. Repo still works but forgets your last board.",
+      "title": "Preferences cannot be saved"
+    },
+    "RENDER_CRASH": {
+      "hint": "Your data is safe. Reload the page to continue.",
+      "title": "This screen crashed"
+    },
+    "STORAGE_CLOSED": {
+      "hint": "Repo may be open in another tab that was updated. Reload this page.",
+      "title": "Storage was closed"
+    },
+    "STORAGE_FAILED": {
+      "hint": "Nothing was lost. Try again.",
+      "title": "Saving to local storage failed"
+    },
+    "STORAGE_QUOTA": {
+      "hint": "Free up space or empty the trash, then try again.",
+      "title": "This device is out of storage"
+    },
+    "STORAGE_UNAVAILABLE": {
+      "hint": "Repo keeps your data in this browser. Allow site data, leave private browsing, then reload.",
+      "title": "Local storage is unavailable"
+    },
+    "UNEXPECTED": {
+      "hint": "Your data is safe on this device. Try again, or reload the page if it keeps happening.",
+      "title": "Something unexpected happened"
+    },
+    "VALIDATION": {
+      "hint": "Some values are not allowed.",
+      "title": "Check your input"
+    }
+  },
+  "error": {
+    "copied": "Copied",
+    "copy": "Copy diagnostics",
+    "copyFailed": "Copy failed",
+    "generic": "Something went wrong. Try again.",
+    "noteLoad": "The note could not be loaded, so editing is locked to protect it.",
+    "reload": "Reload page",
+    "required": "Title is required.",
+    "retry": "Try again",
+    "technical": "Technical details"
+  },
+  "field": {
+    "boardName": "Board name",
+    "column": "Stage",
+    "columnName": "Stage name",
+    "columnTone": "Color",
+    "dueDate": "Due date",
+    "label": "Label",
+    "note": "Note",
+    "priority": "Priority",
+    "summary": "Summary",
+    "title": "Title"
+  },
+  "filter": {
+    "all": "All priorities",
+    "priority": "Priority"
+  },
+  "item": {
+    "add": "Add item",
+    "addTo": "Add item to {stage}",
+    "details": "Item details",
+    "dueDate": "Due date",
+    "emptyColumn": "Nothing here yet",
+    "label": "Label",
+    "labelPlaceholder": "General",
+    "new": "New item",
+    "noDue": "No due date",
+    "note": "Note",
+    "noteCount": "{count} / {max}",
+    "noteLoading": "Loading note...",
+    "notePlaceholder": "Add details, links, or anything you want to remember...",
+    "priority": "Priority",
+    "stage": "Stage",
+    "summary": "Summary",
+    "summaryPlaceholder": "A short description",
+    "title": "Title",
+    "titlePlaceholder": "What needs to be done?"
+  },
+  "kind": {
+    "board": "Board",
+    "column": "Stage",
+    "item": "Item",
+    "note": "Note",
+    "setting": "Setting",
+    "trash": "Trash"
+  },
+  "legal": {
+    "backToApp": "Back to Repo",
+    "license": "MIT License",
+    "privacy": "Privacy & Policy",
+    "version": "Version {version}"
+  },
+  "merge": {
+    "andMore": "and {count} more",
+    "backup": "Backup",
+    "current": "Current",
+    "differs": "Differs",
+    "differsTitle": "{count, plural, one {# record differs from your current data} other {# records differ from your current data}}",
+    "intro": "Records that already exist here are compared with the backup. Nothing is replaced unless you choose to.",
+    "keep": "Keep current",
+    "keepAll": "Keep all current",
+    "liveNow": "This item is on your board right now, but the backup has it in the trash.",
+    "new": "New",
+    "newTitle": "{count, plural, one {# new record will be added} other {# new records will be added}}",
+    "nothing": "Everything in this backup is already here and identical. There is nothing to restore.",
+    "outcome": "After restoring: {added} added, {replaced} replaced, {kept} kept as they are.",
+    "replace": "Replace",
+    "replaceAll": "Replace all",
+    "same": "Identical",
+    "sameInfo": "{count, plural, one {# record is identical and stays as it is.} other {# records are identical and stay as they are.}}",
+    "showAll": "Show all",
+    "showLess": "Show less",
+    "trashedNow": "This item is in your trash right now."
+  },
+  "nav": {
+    "backup": "Backup",
+    "board": "Board",
+    "boards": "Your boards",
+    "language": "Language",
+    "localData": "Local storage. Your data.",
+    "mainMenu": "Main menu",
+    "newBoard": "Create new board",
+    "saved": "Saved on this device",
+    "settings": "Settings",
+    "switchBoard": "Switch board",
+    "trash": "Trash",
+    "workspace": "Workspace"
+  },
+  "priority": {
+    "high": "High",
+    "low": "Low",
+    "medium": "Medium"
+  },
+  "privacy": {
+    "backups": {
+      "body": "A backup is a ZIP file saved to your device. It contains all of your notes and is not encrypted, so store it as carefully as the notes themselves. Checksums detect corruption but do not prove who made a file, so only restore backups you trust.",
+      "title": "Backups"
+    },
+    "card": {
+      "read": "Read the full policy",
+      "summary": "Your data stays on this device. Repo has no account, no tracking and no third-party requests."
+    },
+    "changes": {
+      "body": "If this policy changes, the new version and its date will appear on this page.",
+      "title": "Changes"
+    },
+    "control": {
+      "body": "You can delete items, empty the trash, delete boards, or clear this site's data in your browser settings at any time. Clearing site data permanently removes everything Repo stored, so create a backup first if you want to keep it.",
+      "title": "Your control"
+    },
+    "hosting": {
+      "body": "The site is served as static files through GitHub Pages. Like any web host, GitHub may keep standard technical logs of requests, such as IP address and time, under its own privacy statement. Repo itself cannot see or control those logs.",
+      "title": "Hosting"
+    },
+    "intro": "Repo is a personal workspace that runs entirely in your browser. This page explains what that means for your data.",
+    "limits": {
+      "body": "A browser may clear its storage when a device runs low on space, and storage is not shared between browsers or devices. Create backups regularly.",
+      "title": "Good to know"
+    },
+    "local": {
+      "body": "Boards, items, notes, the trash and your settings are saved in this browser's storage (IndexedDB and localStorage). Repo has no server, no account and no cloud database, so nothing you write is sent to us or to anyone else.",
+      "title": "Your data stays on your device"
+    },
+    "terms": {
+      "body": "Repo is open source under the MIT License. It is provided as is, without warranty of any kind, and the authors are not liable for data loss or damage arising from its use.",
+      "title": "License and terms"
+    },
+    "title": "Privacy & Policy",
+    "tracking": {
+      "body": "Repo does not use analytics, advertising, tracking cookies, or third-party scripts, fonts and images. The page only loads files from its own address.",
+      "title": "No tracking"
+    },
+    "updated": "Last updated: {date}"
+  },
+  "restore": {
+    "apply": "Apply changes",
+    "checks": "Show checks",
+    "chooseOther": "Choose another file",
+    "confirmAction": "Apply changes",
+    "confirmBody": "From {name}: {added} added and {replaced} replaced. Everything else stays as it is.",
+    "confirmTitle": "Apply these changes?",
+    "created": "Created",
+    "createdBy": "Created by",
+    "doneBody": "The backup data you chose is now part of your workspace.",
+    "doneTitle": "Backup restored",
+    "drop": "Drop a backup here or choose a file",
+    "hideChecks": "Hide checks",
+    "hint": "ZIP file, up to 25 MB",
+    "intro": "Choose a backup ZIP created by Repo. It is fully checked and compared with your data before anything changes.",
+    "passphrase": "Backup passphrase",
+    "passphraseHint": "Leave blank for an unencrypted backup.",
+    "notices": "Notices",
+    "records": "Records",
+    "replaceNote": "Restoring never deletes existing data. New records are added, and records you choose to replace are overwritten. Everything is applied at once and undone automatically if verification fails.",
+    "review": "Review before restoring",
+    "safety": "Download a safety backup of my current data first",
+    "verified": "File verified"
+  },
+  "search": {
+    "clear": "Clear search",
+    "placeholder": "Find an item..."
+  },
+  "seed": {
+    "board": {
+      "getting-started": "Getting started"
+    },
+    "column": {
+      "completed": "Completed",
+      "in-progress": "In progress",
+      "in-review": "In review",
+      "not-started": "Not started"
+    },
+    "item": {
+      "check": {
+        "label": "Review",
+        "summary": "Review what has changed and choose your next step.",
+        "title": "Check your progress"
+      },
+      "create-space": {
+        "label": "General",
+        "summary": "Your board is ready. Add items for anything you want to track.",
+        "title": "Create your space"
+      },
+      "define-goal": {
+        "label": "General",
+        "summary": "Decide what you want to organize or accomplish.",
+        "title": "Define your goal"
+      },
+      "gather": {
+        "label": "Preparation",
+        "summary": "Collect useful information, notes, or materials.",
+        "title": "Gather what you need"
+      }
+    }
+  },
+  "settings": {
+    "about": "About",
+    "appVersion": "App version",
+    "backupFormat": "Backup format version",
+    "boards": "Boards",
+    "boardsHint": "Rename boards or delete the ones you no longer need.",
+    "cancelRename": "Cancel renaming",
+    "delete": "Delete {name}",
+    "deleteAnimation": "Play the deletion animation",
+    "deleteAnimationHint": "The card flies into the bin. Needs the floating bin.",
+    "deleteBoardAction": "Delete board",
+    "deleteBoardBody": "This permanently deletes {items, plural, one {# item} other {# items}}, {notes, plural, one {# note} other {# notes}} and {trash, plural, one {# item in the trash} other {# items in the trash}} on this board. Create a backup first if you might need them.",
+    "deleteBoardTitle": "Delete \"{name}\"?",
+    "language": "Language",
+    "languageHint": "Dates and wording follow the language you choose.",
+    "license": "License",
+    "licenseValue": "MIT License",
+    "menuMoveDown": "Move {name} down",
+    "menuMoveUp": "Move {name} up",
+    "menuOrder": "Menu order",
+    "menuOrderHint": "Choose the order of the menu on the sidebar and on the bottom bar.",
+    "menuReset": "Reset order",
+    "rename": "Rename {name}",
+    "retention": "Keep deleted items for",
+    "retention30": "30 days",
+    "retention7": "7 days",
+    "retentionConfirmAction": "Apply and delete",
+    "retentionConfirmBody": "{count, plural, one {# item has been in the trash longer than that and will be deleted forever now.} other {# items have been in the trash longer than that and will be deleted forever now.}}",
+    "retentionConfirmTitle": "Shorten how long items are kept?",
+    "retentionHint": "This also applies to items that are already in the trash.",
+    "retentionNever": "Never delete automatically",
+    "saveName": "Save name",
+    "schemaVersion": "Database schema version",
+    "showBin": "Show the floating trash bin",
+    "showBinHint": "The trash stays available from the menu.",
+    "title": "Settings",
+    "trash": "Trash"
+  },
+  "sort": {
+    "due": "Due date",
+    "label": "Sort",
+    "manual": "Manual order",
+    "newest": "Newest first",
+    "priority": "Priority"
+  },
+  "stages": {
+    "add": "Add stage",
+    "addPlaceholder": "New stage name",
+    "color": "Color",
+    "delete": "Delete {name}",
+    "deleteAction": "Delete stage",
+    "deleteBody": "{count, plural, one {# item is} other {# items are}} in this stage. What should happen to {count, plural, one {it} other {them}}?",
+    "deleteEmpty": "This stage has no items. It will simply be removed.",
+    "deleteTitle": "Delete \"{name}\"?",
+    "doneHint": "Items in a stage marked Done count toward the board's progress.",
+    "intro": "Stages are the columns of your board. Rename them, reorder them, or add your own.",
+    "limit": "Up to {max} stages per board.",
+    "moveDown": "Move {name} down",
+    "moveTarget": "Move to",
+    "moveUp": "Move {name} up",
+    "name": "Stage name",
+    "open": "Edit stages",
+    "optionMove": "Move to another stage",
+    "optionTrash": "Move to the trash",
+    "title": "Edit stages"
+  },
+  "state": {
+    "loading": "Opening your workspace..."
+  },
+  "step": {
+    "apply": "Apply the changes",
+    "checksum": "Verify checksums",
+    "collect": "Read your data",
+    "compare": "Compare with your current data",
+    "compress": "Compress to ZIP",
+    "decrypt": "Decrypt backup",
+    "encrypt": "Encrypt backup",
+    "metadata": "Check metadata and version",
+    "package": "Build files and checksums",
+    "readFile": "Read the file",
+    "refresh": "Reload the workspace",
+    "safety": "Save a safety backup",
+    "save": "Save the file",
+    "selfcheck": "Check data consistency",
+    "snapshot": "Capture a rollback point",
+    "structure": "Validate structure and references",
+    "unpack": "Open the archive",
+    "verifyArchive": "Verify the new archive",
+    "verifyRestore": "Verify restored data"
+  },
+  "toast": {
+    "dismiss": "Dismiss",
+    "itemRestored": "Item restored",
+    "restored": "Backup restored"
+  },
+  "tone": {
+    "amber": "Amber",
+    "green": "Done",
+    "neutral": "Neutral",
+    "violet": "Violet"
+  },
+  "trash": {
+    "daysLeft": "{count, plural, one {# day left} other {# days left}}",
+    "deletedOn": "Deleted {date}",
+    "empty": "The trash is empty.",
+    "keptUntilDeleted": "Kept until you delete it",
+    "lastDay": "Less than a day left",
+    "noNote": "No note",
+    "open": "Open trash",
+    "restoreFailed": "This item cannot be restored because its board has no stages left.",
+    "retention": "Items are deleted forever after {days} days.",
+    "retentionNever": "Items stay in the trash until you delete them.",
+    "title": "Trash"
+  },
+  "validation": {
+    "invalid": "{field} is not valid.",
+    "required": "{field} is required.",
+    "tooLong": "{field} can have at most {limit} characters."
+  },
+  "view": {
+    "board": "Board",
+    "list": "List"
+  },
+  "warn": {
+    "expiredTrash": "{count, plural, one {# trashed item past its 7 days was skipped} other {# trashed items past their 7 days were skipped}}",
+    "orphanNotes": "{count, plural, one {# note without an item was skipped} other {# notes without an item were skipped}}",
+    "orphanTrash": "{count, plural, one {# trashed item without a board was skipped} other {# trashed items without a board were skipped}}",
+    "renumbered": "{count, plural, one {The positions in # list were renumbered to remove duplicates} other {The positions in # lists were renumbered to remove duplicates}}",
+    "unknownFields": "{count, plural, one {Unknown fields in # record were ignored} other {Unknown fields in # records were ignored}}"
+  }
+}
