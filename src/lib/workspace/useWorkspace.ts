@@ -54,9 +54,10 @@ export function useWorkspace() {
   const loadBoard = useCallback(
     async (id: string) => {
       const snap = await getCtl().loadBoard(id);
-      if (!snap) return;
+      if (!snap) return false;
       setColumns(snap.columns);
       setItems(snap.items);
+      return true;
     },
     [getCtl],
   );
@@ -101,8 +102,9 @@ export function useWorkspace() {
 
   const selectBoard = useCallback(
     async (id: string) => {
-      setBoardId(id);
-      await guard("board.load", () => loadBoard(id), undefined);
+      // The id changes only after the board loads, so a failed load keeps showing the current board.
+      const ok = await guard("board.load", () => loadBoard(id), false);
+      if (ok) setBoardId(id);
     },
     [guard, loadBoard],
   );
@@ -220,7 +222,7 @@ export function useWorkspace() {
         await getCtl().setPreference(key, value);
       } catch (e) {
         errorCenter.report(e, { action: "prefs.save" });
-        setPrefs(previous);
+        setPrefs((p) => ({ ...p, [key]: previous[key] }));
       }
     },
     [getCtl, prefs],

@@ -331,6 +331,11 @@ export class BackupService {
             manifest.encryption = encrypted.metadata;
           }
           const zip = ArchiveCodec.pack(manifest, archiveData);
+          try {
+            await this.verifyArchive(zip, options.safetyPassphrase);
+          } catch (e) {
+            throw new AppError("BACKUP_ARCHIVE_INVALID", { cause: e, details: AppError.from(e).details });
+          }
           const name = BackupService.fileName("safety", manifest.createdAtMs);
           FileSaver.download(zip, name);
           return { detail: { key: "detail.saved", vars: { name } } };
@@ -340,6 +345,15 @@ export class BackupService {
         id: "apply",
         titleKey: "step.apply",
         run: async (c) => {
+          // The data may have changed while the safety backup was being built; check again right before writing.
+          let current: BackupData;
+          try {
+            current = await this.storage.snapshots.readAll();
+          } catch (e) {
+            throw new AppError("BACKUP_COLLECT_FAILED", { cause: e, details: AppError.from(e).details });
+          }
+          const fingerprint = await sha256Hex(new TextEncoder().encode(JSON.stringify(current)));
+          if (fingerprint !== plan.fingerprint) throw new AppError("BACKUP_STALE", { details: "The data changed after the comparison was made." });
           c.merged = MergePlanner.resolve(plan.current, plan.data, options.decisions, this.now());
           try {
             await this.storage.snapshots.replaceAll(c.merged.data);

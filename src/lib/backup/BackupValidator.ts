@@ -1,6 +1,6 @@
 import type { Msg } from "@/i18n/types";
 import { AppError } from "@/lib/errors/AppError";
-import { countChars } from "@/lib/storage/utils";
+import { CONTROL_RE, countChars, isRealDate } from "@/lib/storage/utils";
 import {
   COLUMN_TONES,
   LIMITS,
@@ -23,7 +23,6 @@ const ID_RE = /^[A-Za-z0-9_-]{1,64}$/;
 const SEED_RE = /^[a-z0-9-]{1,40}$/;
 const SETTING_KEY_RE = /^[A-Za-z0-9._-]{1,64}$/;
 const HASH_RE = /^[0-9a-f]{64}$/;
-const CONTROL_RE = /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/;
 const MAX_TIMESTAMP = 4_102_444_800_000; // year 2100
 
 /** Collects problems with their location; only the first few are kept for display. */
@@ -84,11 +83,7 @@ class FieldReader {
   date(o: Raw, key: string, path: string): string | null {
     const v = o[key];
     if (v === null || v === undefined) return null;
-    if (typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v)) {
-      const [y, m, d] = v.split("-").map(Number);
-      const check = new Date(y, m - 1, d);
-      if (check.getFullYear() === y && check.getMonth() === m - 1 && check.getDate() === d) return v;
-    }
+    if (typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) && isRealDate(v)) return v;
     this.log.add(`${path}.${key}`, "is not a valid date");
     return null;
   }

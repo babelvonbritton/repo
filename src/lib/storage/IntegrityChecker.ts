@@ -1,7 +1,7 @@
 import type { RepoDatabase } from "./RepoDatabase";
 import type { Clock } from "./types";
 
-export type IntegrityCode = "ORPHAN_COLUMN" | "ORPHAN_ITEM" | "ORPHAN_NOTE" | "DUPLICATE_ORDER" | "EXPIRED_TRASH";
+export type IntegrityCode = "ORPHAN_COLUMN" | "ORPHAN_ITEM" | "ORPHAN_NOTE" | "DUPLICATE_ORDER" | "DUPLICATE_BOARD_ORDER" | "DUPLICATE_COLUMN_ORDER" | "ITEM_BOARD_MISMATCH" | "EXPIRED_TRASH";
 
 export interface IntegrityIssue {
   code: IntegrityCode;
@@ -43,6 +43,23 @@ export class IntegrityChecker {
     }
     for (const id of noteIds) {
       if (!itemIds.has(id)) issues.push({ code: "ORPHAN_NOTE", id, message: "Note points to a missing item" });
+    }
+    const boardOrders = new Set<number>();
+    for (const b of boards) {
+      if (boardOrders.has(b.order)) issues.push({ code: "DUPLICATE_BOARD_ORDER", id: b.id, message: "Two boards share a position" });
+      boardOrders.add(b.order);
+    }
+    const columnOrders = new Map<string, Set<number>>();
+    const columnById = new Map(columns.map((c) => [c.id, c]));
+    for (const c of columns) {
+      const seen = columnOrders.get(c.boardId) ?? new Set<number>();
+      if (seen.has(c.order)) issues.push({ code: "DUPLICATE_COLUMN_ORDER", id: c.id, message: "Two stages share a position on one board" });
+      seen.add(c.order);
+      columnOrders.set(c.boardId, seen);
+    }
+    for (const i of items) {
+      const col = columnById.get(i.columnId);
+      if (col && col.boardId !== i.boardId) issues.push({ code: "ITEM_BOARD_MISMATCH", id: i.id, message: "Item's stage belongs to a different board" });
     }
     const ordersByColumn = new Map<string, Set<number>>();
     for (const i of items) {

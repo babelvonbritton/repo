@@ -1,6 +1,8 @@
 import "fake-indexeddb/auto";
 import { describe, expect, it } from "vitest";
+import { BackupValidator } from "@/lib/backup/BackupValidator";
 import { NOTE_MAX_LENGTH, TRASH_RETENTION_MS, ValidationError } from "@/lib/storage";
+import { Guard } from "@/lib/storage/Guard";
 import { RepoDatabase } from "@/lib/storage/RepoDatabase";
 import { StorageService } from "@/lib/storage";
 
@@ -21,6 +23,30 @@ describe("storage layer", () => {
     expect(first.integrity.ok).toBe(true);
     expect((await service.init()).seeded).toBe(true); // memoized, no second seed
     expect(await service.boards.count()).toBe(1);
+  });
+
+  it("strips control characters but keeps newlines", () => {
+    expect(Guard.text("a\u0007b\u001Bc", "title", 100)).toBe("abc");
+    expect(Guard.text("line one\nline two", "title", 100)).toBe("line one\nline two");
+  });
+
+  it("strips control characters on save so a bad paste cannot block backups", async () => {
+    const { service } = make();
+    await service.init();
+    const item = (await service.items.all())[0];
+    const updated = await service.boardService.updateItem(item.id, { title: "Past\u0007ed title" });
+    expect(updated?.title).toBe("Pasted title");
+    const snapshot = await service.snapshots.readAll();
+    expect(() => BackupValidator.validateData(JSON.parse(JSON.stringify(snapshot)), Date.now())).not.toThrow();
+  });
+
+  it("rejects impossible dates", async () => {
+    const { service } = make();
+    await service.init();
+    const item = (await service.items.all())[0];
+    await expect(service.boardService.updateItem(item.id, { dueDate: "2026-02-30" })).rejects.toBeInstanceOf(ValidationError);
+    const updated = await service.boardService.updateItem(item.id, { dueDate: "2026-02-28" });
+    expect(updated?.dueDate).toBe("2026-02-28");
   });
 
   it("enforces the 4000 character note limit", async () => {
@@ -65,5 +91,23 @@ describe("storage layer", () => {
     const report = await service.integrity.run();
     expect(report.ok).toBe(false);
     expect(report.issues.some((i) => i.code === "ORPHAN_ITEM")).toBe(true);
+  });
+
+  it("flags duplicate board and stage positions and items in a stage of another board", async () => {
+    const { service } = make();
+    await service.init();
+    const boards = await service.boards.listOrdered();
+    await service.boards.put({ ...boards[0], id: "board-dup", name: "Copy", order: boards[0].order });
+    const columns = await service.columns.all();
+    await service.columns.put({ ...columns[0], id: "column-dup", name: "Copy", order: columns[0].order });
+    const other = await service.boardService.createBoard("Other");
+    const item = (await service.items.all())[0];
+    await service.items.put({ ...item, boardId: other.id });
+    const report = await service.integrity.run();
+    expect(report.ok).toBe(false);
+    const codes = report.issues.map((i) => i.code);
+    expect(codes).toContain("DUPLICATE_BOARD_ORDER");
+    expect(codes).toContain("DUPLICATE_COLUMN_ORDER");
+    expect(codes).toContain("ITEM_BOARD_MISMATCH");
   });
 });

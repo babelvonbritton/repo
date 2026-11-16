@@ -52,7 +52,12 @@ export function RestoreReview({ plan, decisions, onDecide, onDecideAll, safety, 
       case "tone": return t(`tone.${v.value}` as MessageKey);
       case "date": return v.value ? formatDate(v.value, locale) : t("diff.none");
       case "place": return t(v.value === "trash" ? "diff.inTrash" : "diff.onBoard");
-      case "long": return v.value ? `${v.value.length > NOTE_PREVIEW ? `${v.value.slice(0, NOTE_PREVIEW)}...` : v.value} (${t("diff.chars", { count: Array.from(v.value).length })})` : t("diff.none");
+      case "long": {
+        if (!v.value) return t("diff.none");
+        const chars = Array.from(v.value);
+        const preview = chars.length > NOTE_PREVIEW ? `${chars.slice(0, NOTE_PREVIEW).join("")}...` : v.value;
+        return `${preview} (${t("diff.chars", { count: chars.length })})`;
+      }
       default: return v.value === "" ? t("diff.none") : v.value;
     }
   };

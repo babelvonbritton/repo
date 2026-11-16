@@ -127,6 +127,19 @@ describe("stages", () => {
     expect(snap.columns.map((c) => c.name)).toEqual(["In progress", "In review", "Completed", "Blocked"]);
     expect(snap.items).toHaveLength(4);
   });
+
+  it("does not offer to delete the last stage", async () => {
+    await openApp();
+    fireEvent.click(screen.getByRole("button", { name: "Edit stages" }));
+    const d = await dialog();
+    for (const name of ["Not started", "In progress", "In review"]) {
+      fireEvent.click(within(d).getByRole("button", { name: `Delete ${name}` }));
+      fireEvent.click(screen.getByRole("button", { name: "Delete stage" }));
+      await waitFor(() => expect(screen.queryByText(name)).toBeNull());
+    }
+    const lastDelete = within(d).getByRole("button", { name: "Delete Completed" }) as HTMLButtonElement;
+    expect(lastDelete.disabled).toBe(true);
+  });
 });
 
 describe("languages", () => {
@@ -198,6 +211,27 @@ describe("restore review", () => {
     expect(replacedIds).toBe(1);
     expect(after.items).toHaveLength(5);
     expect((await storage.integrity.run()).ok).toBe(true);
+  });
+
+  it("does not split an emoji when it previews a long note", async () => {
+    await openApp();
+    const storage = getStorage();
+    const item = (await storage.items.all())[0];
+    await storage.notes.save(item.id, "current note");
+    const original = await storage.snapshots.readAll();
+    const backup = JSON.parse(JSON.stringify(original)) as typeof original;
+    backup.notes[0].text = "a".repeat(139) + "😀" + "b".repeat(50);
+
+    const { dataBytes, manifest } = await ArchiveCodec.describe(backup, Date.now(), "backup");
+    const zip = zipSync({ "manifest.json": strToU8(JSON.stringify(manifest)), "data.json": dataBytes });
+
+    fireEvent.click(menu("Backup"));
+    const d = await dialog();
+    fireEvent.click(within(d).getByRole("tab", { name: "Restore" }));
+    const input = (await within(d).findByLabelText("Drop a backup here or choose a file")) as HTMLInputElement;
+    fireEvent.change(input, { target: { files: [new File([zip], "backup.zip", { type: "application/zip" })] } });
+
+    await waitFor(() => expect(d.textContent).toContain("😀"), { timeout: 5000 });
   });
 });
 

@@ -1,4 +1,4 @@
-import { countChars } from "./utils";
+import { countChars, isRealDate, stripControlChars } from "./utils";
 
 /** Thrown when input fails validation; `field` names the offending value. */
 export type ValidationKind = "required" | "tooLong" | "invalid";
@@ -25,7 +25,7 @@ export class Guard {
   /** Validates a text value: type, null bytes, optional trim, required, max length. */
   static text(value: unknown, field: string, max: number, rules: TextRules = {}): string {
     if (typeof value !== "string") throw new ValidationError(field, `${field} must be text`, "invalid");
-    let clean = value.replace(/\u0000/g, "");
+    let clean = stripControlChars(value);
     if (rules.trim) clean = clean.trim();
     if (rules.required && clean.length === 0) throw new ValidationError(field, `${field} is required`, "required");
     if (countChars(clean) > max) throw new ValidationError(field, `${field} exceeds ${max} characters`, "tooLong", max);
@@ -43,7 +43,7 @@ export class Guard {
   /** Validates an optional ISO date string (YYYY-MM-DD). */
   static dateOrNull(value: unknown, field: string): string | null {
     if (value === null || value === undefined) return null;
-    if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value) || !isRealDate(value)) {
       throw new ValidationError(field, `${field} must be a date`);
     }
     return value;

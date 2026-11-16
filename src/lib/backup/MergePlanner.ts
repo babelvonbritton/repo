@@ -245,22 +245,26 @@ export class MergePlanner {
         out.push({
           entry: entry("item", inc.id, "differs", itemName(inc), diffs, "trashedNow"),
           replace: (w) => {
+            // The note the item had when it was trashed comes back with it; the notes step runs after this
+            // and overwrites it only if the user replaces the note with the backup's version.
+            if (inTrash.note) w.notes.set(inc.id, { itemId: inc.id, text: inTrash.note, updatedAt: inTrash.deletedAt });
             w.trash.delete(inc.id);
             w.items.set(inc.id, { ...inc, order: MergePlanner.place(w, "items", inc.columnId, inc.order) });
           },
         });
       } else {
-        out.push({ entry: entry("item", inc.id, "new", itemName(inc), []), add: (w) => void w.items.set(inc.id, { ...inc, order: MergePlanner.place(w, "items", inc.columnId, inc.order) }) });
+        out.push({ entry: entry("item", inc.id, "new", itemName(inc), []), add: (w) => void w.items.set(inc.id, { ...inc, boardId: w.columns.get(inc.columnId)?.boardId ?? inc.boardId, order: MergePlanner.place(w, "items", inc.columnId, inc.order) }) });
       }
     }
 
     for (const inc of incoming.notes) {
-      const cur = curNotes.get(inc.itemId);
+      // An item in the trash keeps its note in the trash entry, so that is the current version to compare against.
+      const curText = curNotes.get(inc.itemId)?.text ?? curTrash.get(inc.itemId)?.note ?? null;
       const owner = incItems.get(inc.itemId) ?? curItems.get(inc.itemId) ?? curTrash.get(inc.itemId)?.item;
       const name: DisplayName = owner ? itemName(owner) : { text: inc.itemId, seedKey: null, seed: null };
-      if (!cur) out.push({ entry: entry("note", inc.itemId, "new", name, []), add: (w) => void w.notes.set(inc.itemId, { ...inc }) });
+      if (curText === null) out.push({ entry: entry("note", inc.itemId, "new", name, []), add: (w) => void w.notes.set(inc.itemId, { ...inc }) });
       else {
-        const diffs = diff("note", cur.text, inc.text, "long");
+        const diffs = diff("note", curText, inc.text, "long");
         out.push({ entry: entry("note", inc.itemId, diffs.length ? "differs" : "same", name, diffs), replace: (w) => void w.notes.set(inc.itemId, { ...inc }) });
       }
     }
@@ -286,9 +290,11 @@ export class MergePlanner {
         out.push({
           entry: entry("trash", id, "differs", name, diffs, "liveNow"),
           replace: (w) => {
+            // The live note moves into the trash entry with the item instead of being deleted.
+            const note = w.notes.get(id)?.text ?? inc.note;
             w.items.delete(id);
             w.notes.delete(id);
-            w.trash.set(id, { ...inc });
+            w.trash.set(id, { ...inc, note });
           },
         });
       } else out.push({ entry: entry("trash", id, "new", name, []), add: (w) => void w.trash.set(id, { ...inc }) });

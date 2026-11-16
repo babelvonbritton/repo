@@ -22,13 +22,19 @@ export class BoardRepository extends BaseRepository<Board, string> {
     return this.table.orderBy("order").toArray();
   }
 
+  /** Next free position at the end of the board list. */
+  async nextOrder(): Promise<number> {
+    const last = await this.table.orderBy("order").last();
+    return last ? last.order + 1 : 0;
+  }
+
   async create(name: string, seedKey: string | null = null, id: string = createId()): Promise<Board> {
     const now = this.clock();
     const board: Board = {
       id,
       name: Guard.text(name, "board name", LIMITS.boardName, { required: true, trim: true }),
       seedKey,
-      order: await this.table.count(),
+      order: await this.nextOrder(),
       createdAt: now,
       updatedAt: now,
     };

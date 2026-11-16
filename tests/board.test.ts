@@ -32,6 +32,18 @@ describe("board service", () => {
     await expect(service.boardService.moveItem(snap.items[0].id, otherColumn.id, 0)).rejects.toBeInstanceOf(ValidationError);
   });
 
+  it("gives a new board a free position after a middle board is deleted", async () => {
+    const { service } = await make();
+    const b = await service.boardService.createBoard("B");
+    await service.boardService.createBoard("C");
+    await service.boardService.deleteBoard(b.id);
+    const d = await service.boardService.createBoard("D");
+    const boards = await service.boardService.listBoards();
+    const orders = boards.map((x) => x.order);
+    expect(new Set(orders).size).toBe(orders.length);
+    expect(d.order).toBe(3);
+  });
+
   it("validates item updates", async () => {
     const { service, snap } = await make();
     await expect(service.boardService.updateItem(snap.items[0].id, { title: "   " })).rejects.toBeInstanceOf(ValidationError);

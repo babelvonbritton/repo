@@ -136,7 +136,7 @@ export function BackupDialog({ open, onOpenChange, onRestored }: Props) {
   }
 
   function startBackup() {
-    if (encryptBackup && backupPassphrase !== backupPassphraseConfirm) {
+    if (encryptBackup && (backupPassphrase === "" || backupPassphrase !== backupPassphraseConfirm)) {
       setBackupPassphraseError(true);
       return;
     }

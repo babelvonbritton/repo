@@ -73,7 +73,7 @@ export function StagesDialog({ open, onOpenChange, columns, items, onCreate, onR
         <p className="mb-4 text-sm text-muted">{t("stages.intro")}</p>
         <ul className="flex flex-col gap-2">
           {columns.map((c, i) => (
-            <StageRow key={c.id} column={c} first={i === 0} last={i === columns.length - 1} toneOptions={toneOptions} onRename={(v) => run(() => onRename(c.id, v))} onTone={(v) => run(() => onTone(c.id, v))} onMove={(d) => run(() => onMove(c.id, i + d))} onDelete={() => askDelete(c)} />
+            <StageRow key={c.id} column={c} first={i === 0} last={i === columns.length - 1} canDelete={columns.length > 1} toneOptions={toneOptions} onRename={(v) => run(() => onRename(c.id, v))} onTone={(v) => run(() => onTone(c.id, v))} onMove={(d) => run(() => onMove(c.id, i + d))} onDelete={() => askDelete(c)} />
           ))}
         </ul>
 
@@ -144,6 +144,7 @@ interface RowProps {
   column: Column;
   first: boolean;
   last: boolean;
+  canDelete: boolean;
   toneOptions: Array<{ value: ColumnTone; label: string; swatch: string }>;
   onRename: (name: string) => Promise<boolean>;
   onTone: (tone: ColumnTone) => Promise<boolean>;
@@ -152,7 +153,7 @@ interface RowProps {
 }
 
 /** One editable stage. The name is saved when the field loses focus or Enter is pressed. */
-function StageRow({ column, first, last, toneOptions, onRename, onTone, onMove, onDelete }: RowProps) {
+function StageRow({ column, first, last, canDelete, toneOptions, onRename, onTone, onMove, onDelete }: RowProps) {
   const { t } = useI18n();
   const [value, setValue] = useState(column.name);
   useEffect(() => setValue(column.name), [column.name]);
@@ -172,7 +173,7 @@ function StageRow({ column, first, last, toneOptions, onRename, onTone, onMove, 
         <div className="flex items-center gap-1">
           <button type="button" disabled={first} onClick={() => void onMove(-1)} aria-label={t("stages.moveUp", { name: column.name })} className={icon}><Icon name="arrowUp" size={15} /></button>
           <button type="button" disabled={last} onClick={() => void onMove(1)} aria-label={t("stages.moveDown", { name: column.name })} className={icon}><Icon name="arrowDown" size={15} /></button>
-          <button type="button" onClick={onDelete} aria-label={t("stages.delete", { name: column.name })} className="grid size-8 place-items-center rounded-full text-muted transition-colors hover:bg-danger/10 hover:text-danger"><Icon name="trash" size={15} /></button>
+          <button type="button" disabled={!canDelete} title={canDelete ? undefined : t("err.LAST_STAGE.title")} onClick={onDelete} aria-label={t("stages.delete", { name: column.name })} className="grid size-8 place-items-center rounded-full text-muted transition-colors hover:bg-danger/10 hover:text-danger disabled:pointer-events-none disabled:opacity-40"><Icon name="trash" size={15} /></button>
         </div>
       </div>
     </motion.li>

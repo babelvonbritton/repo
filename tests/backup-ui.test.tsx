@@ -36,6 +36,14 @@ describe("backup dialog", () => {
     expect(within(dialog).queryByText("Read your data")).toBeNull();
   });
 
+  it("refuses to start an encrypted backup with an empty passphrase", async () => {
+    const dialog = await openBackup();
+    fireEvent.click(within(dialog).getByRole("checkbox", { name: "Encrypt this backup with a passphrase" }));
+    fireEvent.click(within(dialog).getByRole("button", { name: "Create backup" }));
+    expect(within(dialog).getByRole("alert").textContent).toBe("The passphrases do not match.");
+    expect(within(dialog).queryByText("Read your data")).toBeNull();
+  });
+
   it("runs every backup stage, verifies the archive and offers the saved file", async () => {
     const dialog = await openBackup();
     fireEvent.click(within(dialog).getByRole("button", { name: "Create backup" }));
