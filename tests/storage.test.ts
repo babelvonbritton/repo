@@ -111,3 +111,20 @@ describe("storage layer", () => {
     expect(codes).toContain("ITEM_BOARD_MISMATCH");
   });
 });
+
+describe("preferences", () => {
+  it("writes repaired preferences back so the repair sticks", async () => {
+    const { service } = make();
+    await service.init();
+    await service.settings.write("pref.trashRetentionDays", 99);
+    await service.settings.write("pref.showTrashBin", "yes");
+    const first = await service.preferences.load();
+    expect(first.repaired).toEqual(expect.arrayContaining(["pref.trashRetentionDays", "pref.showTrashBin"]));
+    expect(first.preferences.trashRetentionDays).toBe(7);
+    expect(first.preferences.showTrashBin).toBe(true);
+    expect(await service.settings.read("pref.trashRetentionDays")).toBe(7);
+    expect(await service.settings.read("pref.showTrashBin")).toBe(true);
+    const second = await service.preferences.load();
+    expect(second.repaired).toEqual([]);
+  });
+});

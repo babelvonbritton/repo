@@ -59,8 +59,11 @@ export class PreferenceService {
     for (const name of Object.keys(KEYS) as Array<keyof Preferences>) {
       if (!rows.has(KEYS[name])) continue;
       const value = READERS[name](rows.get(KEYS[name]));
-      if (value === null) repaired.push(KEYS[name]);
-      else next[name] = value;
+      if (value === null) {
+        repaired.push(KEYS[name]);
+        // Write the default back so the repair sticks instead of being reported on every boot.
+        await this.set(name, DEFAULT_PREFERENCES[name]);
+      } else next[name] = value;
     }
     this.current = next as unknown as Preferences;
     return { preferences: this.get(), repaired };

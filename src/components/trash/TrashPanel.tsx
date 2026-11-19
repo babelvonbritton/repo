@@ -19,10 +19,12 @@ interface Props {
   onRestore: (id: string) => Promise<"ok" | "no-stage" | "error">;
   onDeleteForever: (id: string) => Promise<void>;
   onEmpty: () => Promise<void>;
+  /** Opens the section guide for this panel. */
+  onHelp: () => void;
 }
 
 /** Side panel (bottom sheet on phones) listing trashed items; selecting one shows its full details. */
-export function TrashPanel({ open, onOpenChange, entries, retentionDays, onRestore, onDeleteForever, onEmpty }: Props) {
+export function TrashPanel({ open, onOpenChange, entries, retentionDays, onRestore, onDeleteForever, onEmpty, onHelp }: Props) {
   const { t, locale } = useI18n();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [confirm, setConfirm] = useState<"one" | "all" | null>(null);
@@ -45,7 +47,7 @@ export function TrashPanel({ open, onOpenChange, entries, retentionDays, onResto
     <>
       <Dialog.Root open={open} onOpenChange={(o) => { onOpenChange(o); if (!o) { setSelectedId(null); setFailed(false); } }}>
         <Dialog.Portal>
-          <Dialog.Overlay className="anim-overlay fixed inset-0 z-40 bg-forest-900/30 backdrop-blur-[2px]" />
+          <Dialog.Overlay className="anim-overlay fixed inset-0 z-40 bg-forest-900/30" />
           <Dialog.Content
             aria-describedby={undefined}
             className="anim-sheet fixed z-50 flex flex-col bg-surface shadow-[0_30px_70px_-24px_rgba(28,47,38,0.5)] outline-none max-md:inset-x-0 max-md:bottom-0 max-md:h-[85dvh] max-md:rounded-t-[22px] md:right-0 md:top-0 md:h-dvh md:w-[26rem]"
@@ -55,9 +57,14 @@ export function TrashPanel({ open, onOpenChange, entries, retentionDays, onResto
                 <Dialog.Title className="text-lg font-semibold text-forest-900">{t("trash.title")}</Dialog.Title>
                 <p className="mt-0.5 text-sm text-muted">{retentionDays === 0 ? t("trash.retentionNever") : t("trash.retention", { days: retentionDays })}</p>
               </div>
-              <Dialog.Close aria-label={t("action.close")} className="grid size-8 place-items-center rounded-full text-muted transition-colors hover:bg-sage-50 hover:text-ink">
-                <Icon name="close" size={16} />
-              </Dialog.Close>
+              <div className="flex items-center gap-1">
+                <button type="button" onClick={onHelp} aria-label={t("guide.open")} className="grid size-8 place-items-center rounded-full text-muted transition-colors hover:bg-sage-50 hover:text-ink">
+                  <Icon name="help" size={16} />
+                </button>
+                <Dialog.Close aria-label={t("action.close")} className="grid size-8 place-items-center rounded-full text-muted transition-colors hover:bg-sage-50 hover:text-ink">
+                  <Icon name="close" size={16} />
+                </Dialog.Close>
+              </div>
             </div>
 
             <div className="relative min-h-0 flex-1 overflow-y-auto px-6 pb-6">

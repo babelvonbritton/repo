@@ -12,6 +12,7 @@ import { inputClass } from "../ui/Field";
 import { Icon } from "../ui/Icon";
 import { Modal } from "../ui/Modal";
 import { Select } from "../ui/Select";
+import { Toggletip } from "../ui/Toggletip";
 
 const TONES: ColumnTone[] = ["neutral", "amber", "violet", "green"];
 const SWATCH: Record<ColumnTone, string> = { neutral: "bg-sage-200", amber: "bg-amber-tone", violet: "bg-violet-tone", green: "bg-forest-600" };
@@ -78,8 +79,14 @@ export function StagesDialog({ open, onOpenChange, columns, items, onCreate, onR
         </ul>
 
         <div className="mt-4 flex flex-col gap-2 rounded-card border border-dashed border-line p-3 sm:flex-row sm:items-center">
-          <input value={name} maxLength={60} onChange={(e) => { setName(e.target.value); setProblem(null); }} onKeyDown={(e) => e.key === "Enter" && void add()} placeholder={t("stages.addPlaceholder")} aria-label={t("stages.name")} disabled={columns.length >= LIMITS.stagesPerBoard} className={`${inputClass} h-10 flex-1`} />
-          <Select value={tone} onChange={setTone} options={toneOptions} ariaLabel={t("stages.color")} className="sm:w-36" />
+          <span className="flex min-w-0 flex-1 items-center gap-1">
+            <input value={name} maxLength={60} onChange={(e) => { setName(e.target.value); setProblem(null); }} onKeyDown={(e) => e.key === "Enter" && void add()} placeholder={t("stages.addPlaceholder")} aria-label={t("stages.name")} disabled={columns.length >= LIMITS.stagesPerBoard} className={`${inputClass} h-10 min-w-0 flex-1`} />
+            <Toggletip label={t("hint.moreAbout", { field: t("stages.name") })} text={t("hint.stageAdd")} />
+          </span>
+          <span className="flex items-center gap-1">
+            <Select value={tone} onChange={setTone} options={toneOptions} ariaLabel={t("stages.color")} className="sm:w-36" />
+            <Toggletip label={t("hint.moreAbout", { field: t("stages.color") })} text={t("hint.stageTone")} />
+          </span>
           <Button icon="plus" onClick={() => void add()} disabled={!name.trim() || columns.length >= LIMITS.stagesPerBoard}>{t("stages.add")}</Button>
         </div>
         <p className="mt-2 text-xs text-muted">{t("stages.limit", { max: LIMITS.stagesPerBoard })} {t("stages.doneHint")}</p>
@@ -104,7 +111,10 @@ export function StagesDialog({ open, onOpenChange, columns, items, onCreate, onR
       />
 
       <Modal open={deleting !== null && deletingCount > 0} onOpenChange={(o) => !o && setDeleting(null)} title={t("stages.deleteTitle", { name: deleting?.name ?? "" })} width="md:max-w-md">
-        <p className="mb-3 text-sm text-muted">{t("stages.deleteBody", { count: deletingCount })}</p>
+        <p className="mb-3 flex items-start gap-1 text-sm text-muted">
+          <span>{t("stages.deleteBody", { count: deletingCount })}</span>
+          <Toggletip label={t("hint.moreAbout", { field: t("stages.delete", { name: deleting?.name ?? "" }) })} text={t("hint.stageDelete")} />
+        </p>
         <div role="radiogroup" className="flex flex-col gap-2">
           {(["move", "trash"] as const).map((c) => (
             <button key={c} type="button" role="radio" aria-checked={choice === c} onClick={() => setChoice(c)} className={`flex items-center gap-3 rounded-control border p-3 text-left text-sm transition-colors ${choice === c ? "border-forest-600 bg-sage-50" : "border-line hover:bg-sage-50/60"}`}>
@@ -117,7 +127,10 @@ export function StagesDialog({ open, onOpenChange, columns, items, onCreate, onR
         </div>
         {choice === "move" && (
           <div className="mt-3">
-            <label className="mb-1 block text-xs text-muted">{t("stages.moveTarget")}</label>
+            <div className="mb-1 flex items-center gap-1">
+              <label className="text-xs text-muted">{t("stages.moveTarget")}</label>
+              <Toggletip label={t("hint.moreAbout", { field: t("stages.moveTarget") })} text={t("hint.stageMoveTarget")} />
+            </div>
             <Select value={target} onChange={setTarget} ariaLabel={t("stages.moveTarget")} className="w-full" options={columns.filter((c) => c.id !== deleting?.id).map((c) => ({ value: c.id, label: c.name }))} />
           </div>
         )}
@@ -167,7 +180,10 @@ function StageRow({ column, first, last, canDelete, toneOptions, onRename, onTon
   const icon = "grid size-8 place-items-center rounded-full text-muted transition-colors hover:bg-sage-50 hover:text-ink disabled:pointer-events-none disabled:opacity-30";
   return (
     <motion.li layout transition={{ type: "spring", stiffness: 420, damping: 34 }} className="flex flex-col gap-2 rounded-control border border-line bg-surface p-2 sm:flex-row sm:items-center">
-      <input value={value} maxLength={60} onChange={(e) => setValue(e.target.value)} onBlur={() => void commit()} onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()} aria-label={t("stages.name")} className={`${inputClass} order-1 h-10 w-full min-w-0 sm:order-2 sm:flex-1`} />
+      <span className="order-1 flex w-full min-w-0 items-center gap-1 sm:order-2 sm:flex-1">
+        <input value={value} maxLength={60} onChange={(e) => setValue(e.target.value)} onBlur={() => void commit()} onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()} aria-label={t("stages.name")} className={`${inputClass} h-10 min-w-0 flex-1`} />
+        <Toggletip label={t("hint.moreAbout", { field: t("stages.name") })} text={t("hint.stageName")} />
+      </span>
       <div className="order-2 flex items-center justify-between gap-2 sm:order-1 sm:justify-start">
         <Select value={column.tone} onChange={(v) => void onTone(v)} options={toneOptions} ariaLabel={t("stages.color")} className="w-[7.5rem] shrink-0" />
         <div className="flex items-center gap-1">

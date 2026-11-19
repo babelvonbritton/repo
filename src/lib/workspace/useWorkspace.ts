@@ -64,11 +64,13 @@ export function useWorkspace() {
 
   useEffect(() => {
     let alive = true;
+    let timer: ReturnType<typeof setInterval> | undefined;
     (async () => {
       try {
         const boot = await getCtl().boot();
         const snap = await getCtl().loadBoard(boot.activeId);
-        if (!alive || !snap) return;
+        if (!alive) return;
+        if (!snap) throw new AppError("STORAGE_FAILED", { details: "Active board could not be loaded" });
         if (!boot.integrity.ok) {
           errorCenter.report(new AppError("DATA_INTEGRITY", { severity: "warning", details: summarize(boot.integrity), context: { issues: boot.integrity.issues.length } }), { action: "boot.integrity" });
         }
@@ -82,21 +84,22 @@ export function useWorkspace() {
         setColumns(snap.columns);
         setItems(snap.items);
         setPhase("ready");
+        // Expired trash is also purged while the app stays open; only once the app is running, so a failed
+        // boot does not leave a timer firing against a database that never opened.
+        timer = setInterval(() => {
+          void guard("trash.purge", async () => {
+            if ((await getCtl().purgeExpired()) > 0) setTrash(await getCtl().listTrash());
+          }, undefined);
+        }, PURGE_INTERVAL_MS);
       } catch (e) {
         if (!alive) return;
         setBootError(errorCenter.report(e, { action: "boot", surface: "inline" }));
         setPhase("error");
       }
     })();
-    // Expired trash is also purged while the app stays open.
-    const timer = setInterval(() => {
-      void guard("trash.purge", async () => {
-        if ((await getCtl().purgeExpired()) > 0) setTrash(await getCtl().listTrash());
-      }, undefined);
-    }, PURGE_INTERVAL_MS);
     return () => {
       alive = false;
-      clearInterval(timer);
+      if (timer) clearInterval(timer);
     };
   }, [getCtl, guard]);
 

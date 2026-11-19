@@ -24,6 +24,8 @@ const PATHS = {
   pencil: "M5 19h4L19.5 8.5l-4-4L5 15z|M13.5 6.5l4 4",
   gear: "M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z|M12 3v2.5|M12 18.5V21|M3 12h2.5|M18.5 12H21|m5.6 5.6 1.8 1.8|m16.6 16.6 1.8 1.8|m18.4 5.6-1.8 1.8|m7.4 16.6-1.8 1.8",
   globe: "M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16z|M4 12h16|M12 4c2.5 2.3 2.5 13.7 0 16|M12 4c-2.5 2.3-2.5 13.7 0 16",
+  /** Question mark in a circle, for the field help buttons and the section guide. */
+  help: "M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16z|M9.5 9a2.6 2.6 0 1 1 3.8 2.3c-.9.4-1.3 1-1.3 1.9|M12 17h.01",
   archive: "M4 6h16v4H4z|M6 10v9h12v-9|M10 14h4",
   download: "M12 4v10|m8 11 4 4 4-4|M5 19h14",
   alert: "M12 4 3 20h18z|M12 10v4|M12 17h.01",

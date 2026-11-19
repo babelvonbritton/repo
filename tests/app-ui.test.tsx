@@ -297,3 +297,110 @@ describe("restore review with nothing to do", () => {
     expect(within(d).queryByRole("button", { name: "Apply changes" })).toBeNull();
   });
 });
+
+describe("drag and drop", () => {
+  it("drags a card to the middle of another column and stores the order the board shows", async () => {
+    // Give "In progress" a second card so "the middle" is a real position.
+    const storage = getStorage();
+    await storage.init();
+    const board = (await storage.boardService.listBoards())[0];
+    const snap = (await storage.boardService.loadBoard(board.id))!;
+    const inProgress = snap.columns[1];
+    await storage.items.create({ boardId: board.id, columnId: inProgress.id, title: "Drag target" });
+
+    // jsdom reports every element at (0, 0) with no size, so collision detection cannot tell cards
+    // apart. Lay the board out on a grid: one column per 220px, one card per 90px. Install it before
+    // the board renders, so the drag library measures the cards with these rects from the start.
+    // Two things the naive grid gets wrong, both found while debugging this test:
+    // - A real browser reports a rect with the element's own transform applied; jsdom does not, so
+    //   the inline drag translate is added back here. Without it the library subtracts a translate
+    //   the rect never had, the collision rect never moves, and `over` stays the source card.
+    // - Each card's rect is cached on first measurement. When the live preview moves the dragged
+    //   card into the target column, a fresh measurement would make the dragged card itself the
+    //   closest droppable and flip `over` back to it. The cache keys are card ids (a card must
+    //   never fall back to its column's key, or every card in a column shares one rect).
+    const origRect = Element.prototype.getBoundingClientRect;
+    const rectCache = new Map<string, { x: number; y: number; width: number; height: number; top: number; left: number; right: number; bottom: number }>();
+    function gridRectFor(el: Element): { x: number; y: number; width: number; height: number; top: number; left: number; right: number; bottom: number } | null {
+      const section = el.closest("section[aria-label]");
+      if (!section) {
+        // The drag overlay clone lives outside any section: use the original card's grid rect.
+        const inner = el.querySelector("[data-item-id]");
+        const id = inner?.getAttribute("data-item-id") ?? el.getAttribute("data-item-id");
+        if (id) {
+          const original = document.querySelector(`section[aria-label] [data-item-id="${id}"]`);
+          if (original && original !== el) return gridRectFor(original);
+        }
+        return null;
+      }
+      const col = [...document.querySelectorAll("section[aria-label]")].indexOf(section);
+      const cards = [...section.querySelectorAll("[data-item-id]")];
+      const inner = el.querySelectorAll("[data-item-id]");
+      const asCard = el.hasAttribute("data-item-id") ? el : inner.length === 1 ? inner[0] : null;
+      const x = 10 + col * 220;
+      if (asCard) {
+        const y = 120 + cards.indexOf(asCard as Element) * 90;
+        return { x, y, width: 200, height: 80, top: y, left: x, right: x + 200, bottom: y + 80 };
+      }
+      const height = Math.max(140, cards.length * 90 + 40);
+      return { x, y: 100, width: 200, height, top: 100, left: x, right: x + 200, bottom: 100 + height };
+    }
+    function cacheKey(el: Element): string | null {
+      if (el.tagName === "SECTION" && el.hasAttribute("aria-label")) return "col:" + el.getAttribute("aria-label");
+      const id = el.getAttribute("data-item-id") ?? el.querySelector("[data-item-id]")?.getAttribute("data-item-id");
+      return id ? "card:" + id : null;
+    }
+    Element.prototype.getBoundingClientRect = function (this: Element) {
+      const key = cacheKey(this);
+      const inSection = !!this.closest("section[aria-label]");
+      // The drag overlay clone lives outside any section: never cache it, its rect must follow
+      // the pointer via its own inline transform.
+      if (key && inSection && rectCache.has(key)) {
+        const base = rectCache.get(key)!;
+        const t = (this as HTMLElement).style?.transform ?? "";
+        const m = /translate3d\(\s*(-?[\d.]+)px,\s*(-?[\d.]+)px/.exec(t) ?? /translate\(\s*(-?[\d.]+)px,\s*(-?[\d.]+)px/.exec(t);
+        const dx = m ? Number(m[1]) : 0;
+        const dy = m ? Number(m[2]) : 0;
+        return { ...base, x: base.x + dx, y: base.y + dy, top: base.top + dy, left: base.left + dx, right: base.right + dx, bottom: base.bottom + dy } as DOMRect;
+      }
+      const base = gridRectFor(this);
+      if (!base) return origRect.call(this);
+      if (key && inSection) rectCache.set(key, base);
+      const t = (this as HTMLElement).style?.transform ?? "";
+      const m = /translate3d\(\s*(-?[\d.]+)px,\s*(-?[\d.]+)px/.exec(t) ?? /translate\(\s*(-?[\d.]+)px,\s*(-?[\d.]+)px/.exec(t);
+      const dx = m ? Number(m[1]) : 0;
+      const dy = m ? Number(m[2]) : 0;
+      return { ...base, x: base.x + dx, y: base.y + dy, top: base.top + dy, left: base.left + dx, right: base.right + dx, bottom: base.bottom + dy } as DOMRect;
+    };
+    try {
+      await openApp();
+      const source = screen.getByText("Define your goal");
+      // The board uses the mouse sensor, so this is a mouse drag, not a pointer drag: mousedown on the
+      // card, a move past the 6px activation distance, a move over the target, then mouseup.
+      // "Define your goal" sits at column 0, row 0 (x 10-210, y 120-200); "Drag target" is column 1,
+      // row 1 (x 230-430, y 210-290), so (330, 230) is over its upper half: the middle of the column.
+      fireEvent.mouseDown(source, { button: 0, clientX: 110, clientY: 160 });
+      fireEvent.mouseMove(document, { clientX: 110, clientY: 170 });
+      fireEvent.mouseMove(document, { clientX: 330, clientY: 230 });
+      fireEvent.mouseUp(document, { clientX: 330, clientY: 230 });
+
+      // The board shows the card in its new place right away (optimistic move).
+      await waitFor(() => {
+        const section = document.querySelector('section[aria-label="In progress"]')!;
+        const titles = [...section.querySelectorAll("h3")].map((h) => h.textContent);
+        expect(titles).toEqual(["Gather what you need", "Define your goal", "Drag target"]);
+      });
+      // And the database agrees with what the board shows.
+      await waitFor(async () => {
+        const stored = (await getStorage().boardService.loadBoard(board.id))!;
+        const storedTitles = stored.items
+          .filter((i) => i.columnId === inProgress.id)
+          .sort((a, b) => a.order - b.order)
+          .map((i) => i.title);
+        expect(storedTitles).toEqual(["Gather what you need", "Define your goal", "Drag target"]);
+      });
+    } finally {
+      Element.prototype.getBoundingClientRect = origRect;
+    }
+  });
+});

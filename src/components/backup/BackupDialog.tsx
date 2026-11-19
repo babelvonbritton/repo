@@ -65,10 +65,12 @@ interface Props {
   onOpenChange: (open: boolean) => void;
   /** Reloads workspace state after a restore replaced the data. */
   onRestored: () => Promise<void>;
+  /** Opens the section guide for this dialog. */
+  onHelp: () => void;
 }
 
 /** Backup and restore wizard: every stage is shown, verified and reported, and every failure explained. */
-export function BackupDialog({ open, onOpenChange, onRestored }: Props) {
+export function BackupDialog({ open, onOpenChange, onRestored, onHelp }: Props) {
   const { t, locale } = useI18n();
   const service = useMemo(() => new BackupService(getStorage(), errorCenter, { minStepMs: process.env.NODE_ENV === "test" ? 0 : 260 }), []);
   const [tab, setTab] = useState<"backup" | "restore">("backup");
@@ -159,7 +161,7 @@ export function BackupDialog({ open, onOpenChange, onRestored }: Props) {
 
   return (
     <>
-      <Modal open={open} onOpenChange={handleOpenChange} title={t("backup.title")} width="md:max-w-2xl">
+      <Modal open={open} onOpenChange={handleOpenChange} title={t("backup.title")} width="md:max-w-2xl" onHelp={onHelp}>
         <div role="tablist" className="relative mb-5 flex w-fit rounded-control bg-sage-100 p-1">
           {(["backup", "restore"] as const).map((id) => (
             <button key={id} type="button" role="tab" aria-selected={tab === id} disabled={busy} onClick={() => setTab(id)} className={`relative flex h-8 items-center gap-1.5 rounded-[8px] px-3 text-sm transition-colors duration-200 disabled:cursor-not-allowed ${tab === id ? "font-medium text-forest-900" : "text-muted hover:text-ink"}`}>

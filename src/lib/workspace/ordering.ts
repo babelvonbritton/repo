@@ -65,8 +65,13 @@ export function daysLeft(expiresAt: number, now = Date.now()): number {
   return Math.max(0, Math.ceil((expiresAt - now) / 86_400_000));
 }
 
+/** Parses an ISO date (YYYY-MM-DD) without timezone shifts. */
+export function parseDate(iso: string): Date {
+  const [y, m, d] = iso.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
 /** Formats an ISO date (YYYY-MM-DD) for the given locale without timezone shifts. */
 export function formatDate(iso: string, locale: string): string {
-  const [y, m, d] = iso.split("-").map(Number);
-  return new Intl.DateTimeFormat(locale, { month: "short", day: "numeric" }).format(new Date(y, m - 1, d));
+  return new Intl.DateTimeFormat(locale, { month: "short", day: "numeric" }).format(parseDate(iso));
 }

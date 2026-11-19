@@ -8,6 +8,7 @@ import { describeError } from "@/lib/errors/describe";
 import { countChars, NOTE_MAX_LENGTH, type Column, type Item, type Priority } from "@/lib/storage";
 import { Button } from "../ui/Button";
 import { ConfirmDialog } from "../ui/ConfirmDialog";
+import { CopyButton } from "../ui/CopyButton";
 import { DatePicker } from "../ui/DatePicker";
 import { Field, inputClass } from "../ui/Field";
 import { Modal } from "../ui/Modal";
@@ -109,33 +110,39 @@ export function ItemDialog({ mode, open, columns, loadNote, onSubmit, onTrash, o
     <>
       <Modal open={open} onOpenChange={(o) => !o && requestClose()} title={mode.kind === "create" ? t("item.new") : t("item.details")} width="md:max-w-xl">
         <form onSubmit={submit} className="flex flex-col gap-4">
-          <Field label={t("item.title")} htmlFor="item-title">
+          <Field label={t("item.title")} htmlFor="item-title" hint={t("hint.itemTitle")}>
             <input id="item-title" autoFocus={mode.kind === "create"} value={values.title} onChange={(e) => { set("title", e.target.value); setError(null); }} placeholder={t("item.titlePlaceholder")} maxLength={120} className={`${inputClass} h-10`} />
             <AnimatePresence>
               {error && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} role="alert" className="text-xs text-danger">{error.hint ? `${error.title} ${error.hint}` : error.title}</motion.p>}
             </AnimatePresence>
           </Field>
-          <Field label={t("item.summary")} htmlFor="item-summary">
+          <Field label={t("item.summary")} htmlFor="item-summary" hint={t("hint.itemSummary")}>
             <input id="item-summary" value={values.summary} onChange={(e) => set("summary", e.target.value)} placeholder={t("item.summaryPlaceholder")} maxLength={500} className={`${inputClass} h-10`} />
           </Field>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label={t("item.label")} htmlFor="item-label">
+            <Field label={t("item.label")} htmlFor="item-label" hint={t("hint.itemLabel")}>
               <input id="item-label" value={values.label} onChange={(e) => set("label", e.target.value)} placeholder={t("item.labelPlaceholder")} maxLength={40} className={`${inputClass} h-10`} />
             </Field>
-            <Field label={t("item.stage")}>
+            <Field label={t("item.stage")} hint={t("hint.itemStage")}>
               <Select value={values.columnId} onChange={(v) => set("columnId", v)} options={stages} ariaLabel={t("item.stage")} className="w-full" />
             </Field>
-            <Field label={t("item.priority")}>
+            <Field label={t("item.priority")} hint={t("hint.itemPriority")}>
               <Select value={values.priority} onChange={(v) => set("priority", v)} options={priorities} ariaLabel={t("item.priority")} className="w-full" />
             </Field>
-            <Field label={t("item.dueDate")} htmlFor="item-due">
+            <Field label={t("item.dueDate")} htmlFor="item-due" hint={t("hint.itemDueDate")}>
               <DatePicker id="item-due" value={values.dueDate} onChange={(v) => set("dueDate", v)} />
             </Field>
           </div>
           <Field
             label={t("item.note")}
             htmlFor="item-note"
-            aside={<span className={`text-xs tabular-nums transition-colors duration-200 ${count >= NOTE_MAX_LENGTH ? "text-danger" : count >= 3800 ? "text-amber-tone" : "text-muted"}`}>{t("item.noteCount", { count, max: NOTE_MAX_LENGTH })}</span>}
+            hint={t("hint.itemNote")}
+            aside={
+              <span className="flex items-center gap-2">
+                {note && <CopyButton text={note} label={t("item.copyNote")} />}
+                <span className={`text-xs tabular-nums transition-colors duration-200 ${count >= NOTE_MAX_LENGTH ? "text-danger" : count >= 3800 ? "text-amber-tone" : "text-muted"}`}>{t("item.noteCount", { count, max: NOTE_MAX_LENGTH })}</span>
+              </span>
+            }
           >
             <textarea
               id="item-note"

@@ -19,7 +19,7 @@ export function ConfirmDialog({ open, title, body, confirmLabel, cancelLabel, da
   return (
     <AlertDialog.Root open={open} onOpenChange={(o) => !o && onCancel()}>
       <AlertDialog.Portal>
-        <AlertDialog.Overlay className="anim-overlay fixed inset-0 z-[70] grid place-items-center bg-forest-900/40 p-6 backdrop-blur-[2px]">
+        <AlertDialog.Overlay className="anim-overlay fixed inset-0 z-[70] grid place-items-center bg-forest-900/40 p-6">
           <AlertDialog.Content className="anim-dialog w-full max-w-sm rounded-card bg-surface p-6 shadow-[0_30px_70px_-24px_rgba(28,47,38,0.5)] outline-none max-md:max-w-[22rem]">
             <AlertDialog.Title className="text-base font-semibold text-forest-900">{title}</AlertDialog.Title>
             <AlertDialog.Description className="mt-1.5 text-sm text-muted">{body}</AlertDialog.Description>

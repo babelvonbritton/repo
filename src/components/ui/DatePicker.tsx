@@ -3,15 +3,11 @@
 import * as Popover from "@radix-ui/react-popover";
 import { useMemo, useState } from "react";
 import { useI18n } from "@/i18n";
-import { formatDate } from "@/lib/workspace/ordering";
+import { formatDate, parseDate } from "@/lib/workspace/ordering";
 import { Icon } from "./Icon";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 const toIso = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-const parse = (iso: string) => {
-  const [y, m, d] = iso.split("-").map(Number);
-  return new Date(y, m - 1, d);
-};
 
 interface Props {
   value: string | null;
@@ -24,7 +20,7 @@ export function DatePicker({ value, onChange, id }: Props) {
   const { t, locale, localeCode } = useI18n();
   const weekStart = localeCode === "id" ? 1 : 0; // Monday in Indonesia, Sunday in the US and Japan
   const [open, setOpen] = useState(false);
-  const [cursor, setCursor] = useState(() => (value ? parse(value) : new Date()));
+  const [cursor, setCursor] = useState(() => (value ? parseDate(value) : new Date()));
   const today = toIso(new Date());
 
   const days = useMemo(() => {
@@ -46,7 +42,7 @@ export function DatePicker({ value, onChange, id }: Props) {
   };
 
   return (
-    <Popover.Root open={open} onOpenChange={(o) => { setOpen(o); if (o) setCursor(value ? parse(value) : new Date()); }}>
+    <Popover.Root open={open} onOpenChange={(o) => { setOpen(o); if (o) setCursor(value ? parseDate(value) : new Date()); }}>
       <Popover.Trigger
         id={id}
         className="group flex h-10 w-full items-center justify-between gap-2 rounded-control border border-line bg-surface px-3 text-sm transition-[border-color,box-shadow] duration-200 hover:border-sage-200 data-[state=open]:border-forest-600 data-[state=open]:shadow-[0_0_0_3px_rgba(59,106,83,0.12)]"

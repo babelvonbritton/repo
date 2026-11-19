@@ -35,6 +35,8 @@ export interface SettingsDialogProps {
   onDeleteBoard: (id: string) => Promise<void>;
   onNewBoard: () => void;
   schemaVersion: number;
+  /** Opens the section guide for this dialog. */
+  onHelp: () => void;
 }
 
 function Card({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
@@ -130,7 +132,7 @@ function BoardRow({ board, canDelete, onRename, onBoardStats, onDelete }: { boar
 
 /** Application settings: language, boards, menu order, trash behavior, privacy and version information. */
 export function SettingsDialog(props: SettingsDialogProps) {
-  const { open, onOpenChange, boards, prefs, onPref, onRetentionImpact, onRetention, onNewBoard, schemaVersion } = props;
+  const { open, onOpenChange, boards, prefs, onPref, onRetentionImpact, onRetention, onNewBoard, schemaVersion, onHelp } = props;
   const { t, localeCode } = useI18n();
   const { language, setLanguage } = useLanguage();
   const [pending, setPending] = useState<{ days: RetentionDays; count: number } | null>(null);
@@ -154,7 +156,7 @@ export function SettingsDialog(props: SettingsDialogProps) {
 
   return (
     <>
-      <Modal open={open} onOpenChange={onOpenChange} title={t("settings.title")} width="md:max-w-xl">
+      <Modal open={open} onOpenChange={onOpenChange} title={t("settings.title")} width="md:max-w-xl" onHelp={onHelp}>
         <div className="flex flex-col gap-4">
           <Card title={t("settings.language")} hint={t("settings.languageHint")}>
             <Select value={language} onChange={(v) => setLanguage(v as Locale)} ariaLabel={t("nav.language")} className="w-full sm:w-64" prefix={<Icon name="globe" size={15} className="text-muted" />} options={LOCALES.map((l) => ({ value: l, label: LOCALE_NAMES[l] }))} />

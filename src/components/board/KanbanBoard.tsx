@@ -86,9 +86,17 @@ export function KanbanBoard({ columns, items, dragEnabled, onMove, onOpen, onAdd
       const overId = String(over.id);
       const column = columnOf(overId);
       if (column === current.columnId && !overId.startsWith(COL_PREFIX) && overId !== id) {
-        const list = itemsOf(view, column);
-        const to = list.findIndex((i) => i.id === overId);
-        if (to >= 0) next = applyMove(view, id, column, to);
+        // Mirror the live preview: drop after the card only when the pointer is
+        // below its midpoint, otherwise before it. Read the over card's index
+        // from the list without the dragged card, because applyMove removes
+        // it first; reading it from the draft list (which already holds the
+        // dragged card at the previewed spot) lands one place too far.
+        const list = itemsOf(view, column).filter((i) => i.id !== id);
+        const overIndex = list.findIndex((i) => i.id === overId);
+        if (overIndex >= 0) {
+          const below = (active.rect.current.translated?.top ?? 0) > over.rect.top + over.rect.height / 2;
+          next = applyMove(view, id, column, overIndex + (below ? 1 : 0));
+        }
       }
     }
     const before = items.find((i) => i.id === id);

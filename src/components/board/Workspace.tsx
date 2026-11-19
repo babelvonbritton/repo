@@ -30,6 +30,7 @@ import { ItemDialog, type DialogMode, type FormValues } from "./ItemDialog";
 import { KanbanBoard } from "./KanbanBoard";
 import { ListView } from "./ListView";
 import { MobileNav, type NavEntry } from "./MobileNav";
+import { SectionGuide } from "./SectionGuide";
 import { Sidebar } from "./Sidebar";
 import { StagesDialog } from "./StagesDialog";
 import type { ViewMode } from "./types";
@@ -47,6 +48,7 @@ export function Workspace() {
   const [backupOpen, setBackupOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [stagesOpen, setStagesOpen] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
   const [newBoardOpen, setNewBoardOpen] = useState(false);
   const [boardName, setBoardName] = useState("");
   const [boardError, setBoardError] = useState<{ title: string; hint: string } | null>(null);
@@ -141,6 +143,7 @@ export function Workspace() {
             <Select value={ws.boardId ?? ""} onChange={ws.selectBoard} options={boards.map((b) => ({ value: b.id, label: b.name }))} ariaLabel={t("nav.switchBoard")} className="h-9 w-40 md:hidden" />
             <span className="hidden items-center gap-1.5 text-xs text-muted lg:flex"><span className="size-1.5 rounded-full bg-forest-600" />{t("nav.saved")}</span>
             <Select value={language} onChange={(v) => setLanguage(v as Locale)} ariaLabel={t("nav.language")} className="max-md:!hidden h-9 w-44 md:inline-flex" prefix={<Icon name="globe" size={15} className="text-muted" />} options={LOCALES.map((l) => ({ value: l, label: LOCALE_NAMES[l] }))} />
+            <Button variant="ghost" icon="help" onClick={() => setGuideOpen(true)} aria-label={t("guide.open")} />
           </div>
         </header>
 
@@ -157,7 +160,7 @@ export function Workspace() {
           </div>
 
           <section className="mb-5 flex items-center gap-4 rounded-card border border-sage-100 bg-sage-50 px-4 py-3.5">
-            <span className="grid size-9 shrink-0 place-items-center rounded-control bg-surface text-forest-700"><Icon name="sparkle" size={17} /></span>
+            <span className="grid size-9 shrink-0 place-items-center rounded-control bg-surface text-forest-700"><Icon name="board" size={17} /></span>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-medium text-ink">{t("board.glance")}</p>
               <p className="text-xs text-muted">{t("board.completed", { done, total: items.length })}</p>
@@ -185,12 +188,12 @@ export function Workspace() {
           <p className="mt-4 text-xs text-muted">{locked ? t("board.hintLocked") : t("board.hintDrag")}</p>
         </main>
 
-        <LegalFooter className="mb-[var(--bottom-nav,0px)] bg-canvas/90 backdrop-blur md:sticky md:bottom-0 md:z-20 md:mb-0" />
+        <LegalFooter className="mb-[var(--bottom-nav,0px)] bg-canvas/90 md:sticky md:bottom-0 md:z-20 md:mb-0" />
       </div>
 
       <MobileNav items={navItems} activeId={activeNav} />
       {ws.prefs.showTrashBin && <TrashBin count={ws.trash.length} onOpen={() => setTrashOpen(true)} hidden={overlayOpen} />}
-      <TrashPanel open={trashOpen} onOpenChange={setTrashOpen} entries={trash} retentionDays={ws.prefs.trashRetentionDays} onRestore={ws.restore} onDeleteForever={ws.deleteForever} onEmpty={ws.emptyTrash} />
+      <TrashPanel open={trashOpen} onOpenChange={setTrashOpen} entries={trash} retentionDays={ws.prefs.trashRetentionDays} onRestore={ws.restore} onDeleteForever={ws.deleteForever} onEmpty={ws.emptyTrash} onHelp={() => setGuideOpen(true)} />
 
       {itemDialog.value && (
         <ItemDialog
@@ -219,12 +222,14 @@ export function Workspace() {
         onDeleteBoard={ws.deleteBoard}
         onNewBoard={() => setNewBoardOpen(true)}
         schemaVersion={ws.schemaVersion()}
+        onHelp={() => setGuideOpen(true)}
       />
-      <BackupDialog open={backupOpen} onOpenChange={setBackupOpen} onRestored={ws.refreshAll} />
+      <BackupDialog open={backupOpen} onOpenChange={setBackupOpen} onRestored={ws.refreshAll} onHelp={() => setGuideOpen(true)} />
+      <SectionGuide open={guideOpen} onOpenChange={setGuideOpen} section={activeNav} />
 
       <Modal open={newBoardOpen} onOpenChange={setNewBoardOpen} title={t("board.createTitle")} width="md:max-w-md">
         <form onSubmit={createBoard} className="flex flex-col gap-4">
-          <Field label={t("board.nameLabel")} htmlFor="board-name">
+          <Field label={t("board.nameLabel")} htmlFor="board-name" hint={t("hint.boardName")}>
             <input id="board-name" autoFocus value={boardName} onChange={(e) => { setBoardName(e.target.value); setBoardError(null); }} placeholder={t("board.namePlaceholder")} maxLength={60} className={`${inputClass} h-10`} />
             <AnimatePresence>
               {boardError && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} role="alert" className="text-xs text-danger">{boardError.title} {boardError.hint}</motion.p>}
